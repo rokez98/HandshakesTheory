@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandshakesTheory", "HandshakesTheory\HandshakesTheory.csproj", "{44249403-C8C0-40E4-95AE-AB0EB3DDD6CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{25C6EFA0-6EE3-48EA-8679-943F83952BBF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{44249403-C8C0-40E4-95AE-AB0EB3DDD6CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44249403-C8C0-40E4-95AE-AB0EB3DDD6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44249403-C8C0-40E4-95AE-AB0EB3DDD6CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C6EFA0-6EE3-48EA-8679-943F83952BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C6EFA0-6EE3-48EA-8679-943F83952BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C6EFA0-6EE3-48EA-8679-943F83952BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C6EFA0-6EE3-48EA-8679-943F83952BBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
