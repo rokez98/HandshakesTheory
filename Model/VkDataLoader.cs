@@ -2,7 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 
-namespace TestVkApi
+namespace HandshakesTheory.Models
 {
     public class VkDataLoader : IVkDataLoader
     {

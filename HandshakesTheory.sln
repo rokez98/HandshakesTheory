@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandshakesTheory", "HandshakesTheory\HandshakesTheory.csproj", "{44249403-C8C0-40E4-95AE-AB0EB3DDD6CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{25C6EFA0-6EE3-48EA-8679-943F83952BBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandshakesTheory.Model", "Model\HandshakesTheory.Model.csproj", "{25C6EFA0-6EE3-48EA-8679-943F83952BBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace TestVkApi
+namespace HandshakesTheory.Models
 {
     public interface IVkDataLoader
     {
