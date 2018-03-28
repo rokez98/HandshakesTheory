@@ -1,5 +1,3 @@
-using System;
-
 namespace HandshakesTheory.Models
 {
     public class ErrorViewModel
