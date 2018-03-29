@@ -4,17 +4,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-<script>
-    var slider = document.getElementById("myRange");
-    var output = document.getElementById("demo");
-    output.innerHTML = slider.value; // Display the default slider value
-
-    // Update the current slider value (each time you drag the slider handle)
-    slider.oninput = function () {
-        output.innerHTML = this.value;
-    }
-</script>
-
 <form asp-controller="Home" asp-action="Search" method="post">
     <div class="container" style="margin-top: 20px;">
         <div class="row">
@@ -67,3 +56,13 @@
         </div>
     </div>
 </form>
+
+<script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("pathLength");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+</script>
