@@ -15,6 +15,15 @@ namespace HandshakesTheory.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Search(SearchModel searchModel)
+        {
+            var graph = Vk.BuildSocialGraph(searchModel.UserId, searchModel.SearchedId, searchModel.MaxPathLength);
+            var answers = graph.searchAllPathes(searchModel.UserId, searchModel.SearchedId);
+
+            return View(answers);
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -27,11 +36,6 @@ namespace HandshakesTheory.Controllers
             ViewData["Message"] = "Your contact page.";
 
             return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
