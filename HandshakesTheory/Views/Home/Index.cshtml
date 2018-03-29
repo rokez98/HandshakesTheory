@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
@@ -20,20 +20,28 @@
                             <span id="firstStatus" class="sr-only">(success)</span>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
-                                <input type="text" asp-for="SearchedId"  class="form-control" id="second" aria-describedby="secondStatus">
+                                <input type="text" asp-for="SearchedId" class="form-control" id="second" aria-describedby="secondStatus">
                             </div>
                             <span class="feedback feedback-user-name" aria-hidden="true"></span>
                             <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
                             <span id="secondStatus" class="sr-only">(success)</span>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group has-feedback">
+                            <div class="input-group">
+                                <span class="input-group-addon">Path length:</span>
+                                <input type="text" asp-for="MaxPathLength" class="form-control" id="pathLength">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-md-push-8">
+                    <div class="col-md-12 col-md-push-8">
                         <div class="form-group btn-group search-button">
                             <input type="submit" class="btn btn-primary" id="startButton" data-toggle="modal" data-target="#startModal">
                             <button type="button" class="btn btn-primary" id="settingButton" data-toggle="modal" data-target="#settingModal" aria-expanded="false">

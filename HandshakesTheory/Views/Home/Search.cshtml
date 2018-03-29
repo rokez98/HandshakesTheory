@@ -8,31 +8,42 @@
     <center>
         <div class="result-panel" id="count">
             <div class="empty-row"></div>
+            @if (Model.Any())
+            {
+        <div>
+            <span>Вы знакомы через @Math.Abs(Model.First().Length - 2) пользователей</span>
             <div>
-               <span class="glyphicon glyphicon-user count-icon"></span>
-                 <span class="glyphicon glyphicon-user count-icon"></span>
-            </div>
-            <div>
-                <span>Вы знакомы через X пользователей</span>
+                @for (int i = 0; i < Model.First().Length - 2; i++)
+                {
+                    <span class="glyphicon glyphicon-user count-icon"></span>
+                }
             </div>
         </div>
-        <div class="result-panel active" id="write">
-            <ul class="list-group">
-              @foreach (var answer in Model)
-              {
+            }
+            else
+            {
+                <div>
+                    <span> Не удалось найти связь. Попробуйте увеличить максимальную длину цепочки.</span>
+                </div>
+            }
+        </div>
+            <div class="result-panel active" id="write">
+                <ul class="list-group">
+                    @foreach (var answer in Model)
+            {
                 <li class="list-group-item">
                     <div class="item-row">
                         @foreach (var user in answer)
-                        {
-                            <div class="item-cell">
-                                 <a target="_blank" title="" href="http://vk.com/id107094114">@user.Id</a>
-                            </div>
-                        }
+                {
+                    <div class="item-cell">
+                        <a target="_blank" href="@string.Format("https://vk.com/id{0}",user.Id)" title="">@user.Id</a>
+                    </div>
+        }
                     </div>
                 </li>
-              }
-            </ul>
-        </div>
-    </center>
+    }
+                </ul>
+            </div>
+</center>
 </div>
 

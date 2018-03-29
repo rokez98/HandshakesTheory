@@ -9,6 +9,6 @@ namespace HandshakesTheory.Models
     {
         public int UserId { get; set; }
         public int SearchedId { get; set; }
-        public int MaxPathLength { get; set; } = 5;
+        public int MaxPathLength { get; set; }
     }
 }
