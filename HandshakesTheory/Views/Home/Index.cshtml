@@ -4,12 +4,23 @@
     ViewData["Title"] = "Home Page";
 }
 
+<script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value; // Display the default slider value
+
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+</script>
+
 <form asp-controller="Home" asp-action="Search" method="post">
-    <div class="container">
+    <div class="container" style="margin-top: 20px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
@@ -20,7 +31,7 @@
                             <span id="firstStatus" class="sr-only">(success)</span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
@@ -31,23 +42,24 @@
                             <span id="secondStatus" class="sr-only">(success)</span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group has-feedback">
                             <div class="input-group">
-                                <span class="input-group-addon">Path length:</span>
-                                <input type="text" asp-for="MaxPathLength" class="form-control" id="pathLength">
+                                <span class="input-group-addon">Max path</span>
+                                <label class="form-control" id="pathLength"></label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="slidecontainer">
+                            <input asp-for="MaxPathLength" type="range" min="3" max="7" value="4" class="slider" id="myRange">
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-md-push-8">
+                    <div class="col-md-12">
                         <div class="form-group btn-group search-button">
                             <input type="submit" class="btn btn-primary" id="startButton" data-toggle="modal" data-target="#startModal">
-                            <button type="button" class="btn btn-primary" id="settingButton" data-toggle="modal" data-target="#settingModal" aria-expanded="false">
-                                <span class="glyphicon glyphicon-wrench"></span>
-                                <span class="sr-only"></span>
-                            </button>
                         </div>
                     </div>
                 </div>
