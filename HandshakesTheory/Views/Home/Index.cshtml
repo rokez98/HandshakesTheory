@@ -48,7 +48,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group btn-group search-button">
-                            <input type="submit" class="btn btn-primary" id="startButton" data-toggle="modal" data-target="#startModal">
+                            <input type="submit" class="btn btn-primary" id="submitButton" data-toggle="modal" data-target="#startModal">
                         </div>
                     </div>
                 </div>
@@ -74,6 +74,11 @@
     var secondId = document.getElementById("secondId");
     var secondIdForm = document.getElementById("secondIdForm");
 
+    var submitButton = document.getElementById("submitButton");
+
+    var firstIdSuccess = false;
+    var secondIdSuccess = false;
+
     firstId.oninput = function () {
         var users = [];
         $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + firstId.value + '&fields=sex,bdate,photo_100,education&callback=?',
@@ -81,12 +86,19 @@
                 if (result.error) {
                     firstIdForm.classList.remove("has-success");
                     firstIdForm.classList.add("has-error");
+
+                    firstIdSuccess = false;
+
+                    submitButton.disabled = true;
                 }
                 else {
                     users = users.concat(result.response);
 
                     firstIdForm.classList.add("has-success");
                     firstIdForm.classList.remove("has-error");
+
+                    firstIdSuccess = true;
+                    if (secondIdSuccess == true)  submitButton.disabled = false;
                 }
             });
     }
@@ -98,12 +110,19 @@
                 if (result.error) {
                     secondIdForm.classList.remove("has-success");
                     secondIdForm.classList.add("has-error");
+
+                    secondIdSuccess = false;
+
+                    submitButton.disabled = true;
                 }
                 else {
                     users = users.concat(result.response);
 
                     secondIdForm.classList.add("has-success");
                     secondIdForm.classList.remove("has-error");
+
+                    secondIdSuccess = true;
+                    if (firstIdSuccess == true) submitButton.disabled = false;
                 }
             });
     }
