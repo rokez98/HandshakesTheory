@@ -10,10 +10,10 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="form-group has-feedback">
+                        <div id="firstIdForm" class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
-                                <input type="text" asp-for="UserId" class="form-control" id="first" aria-describedby="firstStatus">
+                                <input type="text" asp-for="UserId" class="form-control" id="firstId" aria-describedby="firstStatus">
                             </div>
                             <span class="feedback feedback-user-name" aria-hidden="true"></span>
                             <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
@@ -21,10 +21,10 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="form-group has-feedback">
+                        <div id="secondIdForm" class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
-                                <input type="text" asp-for="SearchedId" class="form-control" id="second" aria-describedby="secondStatus">
+                                <input type="text" asp-for="SearchedId" class="form-control" id="secondId" aria-describedby="secondStatus">
                             </div>
                             <span class="feedback feedback-user-name" aria-hidden="true"></span>
                             <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
@@ -65,4 +65,47 @@
     slider.oninput = function () {
         output.innerHTML = this.value;
     }
+</script>
+
+<script>
+    var firstId = document.getElementById("firstId");
+    var firstIdForm = document.getElementById("firstIdForm");
+
+    var secondId = document.getElementById("secondId");
+    var secondIdForm = document.getElementById("secondIdForm");
+
+    firstId.oninput = function () {
+        var users = [];
+        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + firstId.value + '&fields=sex,bdate,photo_100,education&callback=?',
+            function (result) {
+                if (result.error) {
+                    firstIdForm.classList.remove("has-success");
+                    firstIdForm.classList.add("has-error");
+                }
+                else {
+                    users = users.concat(result.response);
+
+                    firstIdForm.classList.add("has-success");
+                    firstIdForm.classList.remove("has-error");
+                }
+            });
+    }
+
+    secondId.oninput = function () {
+        var users = [];
+        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + secondId.value + '&fields=sex,bdate,photo_100,education&callback=?',
+            function (result) {
+                if (result.error) {
+                    secondIdForm.classList.remove("has-success");
+                    secondIdForm.classList.add("has-error");
+                }
+                else {
+                    users = users.concat(result.response);
+
+                    secondIdForm.classList.add("has-success");
+                    secondIdForm.classList.remove("has-error");
+                }
+            });
+    }
+
 </script>
