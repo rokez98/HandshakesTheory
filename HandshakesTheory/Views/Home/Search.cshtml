@@ -36,7 +36,7 @@
                         @foreach (var user in answer)
                 {
                     <div class="item-cell">
-                        <a target="_blank" href="@string.Format("https://vk.com/id{0}",user.Id)" title="">@user.Id</a>
+                        <a target="_blank" href="@string.Format("https://vk.com/id{0}",user.Id)" title="">@user.FirstName @user.LastName</a>
                     </div>
         }
                     </div>

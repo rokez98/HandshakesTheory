@@ -31,12 +31,12 @@ namespace HandshakesTheory.Models
 
 
 
-        private static Graph MakeUsersSocialGraph(int userId, int populationLimit, TreeType treeType)
+        private static Graph MakeUsersSocialGraph(VkUser user, int populationLimit, TreeType treeType)
         {
             Graph graph = new Graph();
 
             SortedSet<int> toDownloadList = new SortedSet<int>();
-            toDownloadList.Add(userId);
+            toDownloadList.Add(user.Id);
 
             var friendsOfFriends = Vk.DownloadFriendsIds(toDownloadList);
 
@@ -45,7 +45,7 @@ namespace HandshakesTheory.Models
                 var friendId = friendsList.Key;
                 var friendsOfFriendIds = friendsList.Value;
 
-                graph.AddNode(friendId, treeType == TreeType.Normal ? 0 : 100);
+                graph.AddNode(user, treeType == TreeType.Normal ? 0 : 100);
 
                 foreach (var friend in friendsOfFriendIds)
                 {
@@ -91,10 +91,10 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        public static Graph BuildSocialGraph(int userId, int searchedId, int maximalDepth)
+        public static Graph BuildSocialGraph(VkUser firstUser, VkUser secondUser, int maximalDepth)
         {
-            var normalGraph = Vk.MakeUsersSocialGraph(userId, 1, TreeType.Normal);
-            var reversedGraph = Vk.MakeUsersSocialGraph(searchedId, 1, TreeType.Reversed);
+            var normalGraph = Vk.MakeUsersSocialGraph(firstUser, 1, TreeType.Normal);
+            var reversedGraph = Vk.MakeUsersSocialGraph(secondUser, 1, TreeType.Reversed);
 
             int currentDepth = 3;
 

@@ -34,11 +34,6 @@ namespace HandshakesTheory.Models
 
         private Dictionary<int, Node> socialGraph = new Dictionary<int, Node>();
 
-        public void AddNode(int id, int depth)
-        {
-            if (!socialGraph.ContainsKey(id)) socialGraph.Add(id, new Node(id, depth));
-        }
-
         public void AddNode(VkUser user, int depth)
         {
             if (!socialGraph.ContainsKey(user.Id)) socialGraph.Add(user.Id, new Node(user, depth));

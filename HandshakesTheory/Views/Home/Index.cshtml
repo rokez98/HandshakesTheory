@@ -14,7 +14,9 @@
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
                                 <input type="text" class="form-control" id="firstId" aria-describedby="firstStatus">
-                                <input type="hidden" asp-for="UserId" id="firstUserId"/>
+                                <input type="hidden" asp-for="FirstUser.Id" id="firstUserId" />
+                                <input type="hidden" asp-for="FirstUser.FirstName" id="firstUserFirstName" />
+                                <input type="hidden" asp-for="FirstUser.LastName" id="firstUserLastName" />
                             </div>
                             <span id="firstIdUsernameFeedback" class="feedback feedback-user-name" aria-hidden="true"></span>
                             <span id="firstIdFeedbackIcon" class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
@@ -26,7 +28,9 @@
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
                                 <input type="text" class="form-control" id="secondId" aria-describedby="secondStatus">
-                                <input type="hidden" asp-for="SearchedId" id="secondUserId" />
+                                <input type="hidden" asp-for="SecondUser.Id" id="secondUserId" />
+                                <input type="hidden" asp-for="SecondUser.FirstName" id="secondUserFirstName" />
+                                <input type="hidden" asp-for="SecondUser.LastName" id="secondUserLastName" />
                             </div>
                             <span id="secondIdUsernameFeedback" class="feedback feedback-user-name" aria-hidden="true"></span>
                             <span id="secondIdFeedbackIcon" class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
@@ -71,13 +75,21 @@
 
 <script>
     var firstId = document.getElementById("firstId");
+
     var firstUserId = document.getElementById("firstUserId");
+    var firstUserFirstName = document.getElementById("firstUserFirstName");
+    var firstUserLastName = document.getElementById("firstUserLastName");
+
+
     var firstIdForm = document.getElementById("firstIdForm");
     var firstIdUsernameFeedback = document.getElementById("firstIdUsernameFeedback");
     var firstIdFeedbackIcon = document.getElementById("firstIdFeedbackIcon");
     
 
     var secondId = document.getElementById("secondId");
+    var secondUserFirstName = document.getElementById("secondUserFirstName");
+    var secondUserLastName = document.getElementById("secondUserLastName");
+
     var secondUserId = document.getElementById("secondUserId");
     var secondIdForm = document.getElementById("secondIdForm");
     var secondIdUsernameFeedback = document.getElementById("secondIdUsernameFeedback");
@@ -110,6 +122,8 @@
                     users = users.concat(result.response);
 
                     firstUserId.value = users[0].uid;
+                    firstUserFirstName.value = users[0].first_name;
+                    firstUserLastName.value = users[0].last_name;
 
                     firstIdForm.classList.add("has-success");
                     firstIdForm.classList.remove("has-error");
@@ -144,7 +158,10 @@
                 }
                 else {
                     users = users.concat(result.response);
+
                     secondUserId.value = users[0].uid;
+                    secondUserFirstName.value = users[0].first_name;
+                    secondUserLastName.value = users[0].last_name;
 
 
                     secondIdFeedbackIcon.classList.remove("glyphicon-remove");
