@@ -22,8 +22,8 @@ namespace HandshakesTheory.Controllers
 
             try
             {
-                var graph = Vk.BuildSocialGraph(searchModel.UserId, searchModel.SearchedId, searchModel.MaxPathLength, out userId, out searchedId);
-                var answers = graph.searchAllPathes(userId, searchedId);
+                var graph = Vk.BuildSocialGraph(searchModel.UserId, searchModel.SearchedId, searchModel.MaxPathLength);
+                var answers = graph.searchAllPathes(searchModel.UserId, searchModel.SearchedId);
                 return View(answers);
             }
             catch (Exception ex)
