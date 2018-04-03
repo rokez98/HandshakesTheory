@@ -94,3 +94,88 @@ li.list-group-item .item-row {
         background: #4CAF50;
         cursor: pointer;
     }
+
+.feedback {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    height: 34px;
+    line-height: 34px;
+    z-index: 2;
+}
+
+.feedback-user-name {
+    right: 34px;
+    opacity: .2;
+    pointer-events: none;
+}
+
+.has-feedback.has-success span.feedback-user-name {
+    animation-name: blink;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+}
+
+.has-feedback.has-success span {
+    color: #3c763d;
+}
+
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    background-color: transparent;
+}
+
+.has-feedback.has-success span {
+    color: #3c763d;
+}
+
+.has-feedback.has-success span {
+    color: #3c763d;
+}
+
+.feedback-icon {
+    right: 0;
+    width: 34px;
+}
+
+.feedback {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    height: 34px;
+    line-height: 34px;
+    z-index: 2;
+}
+
+.glyphicon {
+    position: absolute;
+    top: 10px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-ok:before {
+    content: "\e013";
+}
+
+.glyphicon-remove:before {
+    content: "\e014";
+}
+
+.glyphicon, address {
+    font-style: normal;
+}
+
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+
+.form-control {
+    background-color: transparent;
+}

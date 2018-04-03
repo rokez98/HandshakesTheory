@@ -9,29 +9,29 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div id="firstIdForm" class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
                                 <input type="text" asp-for="UserId" class="form-control" id="firstId" aria-describedby="firstStatus">
                             </div>
-                            <span class="feedback feedback-user-name" aria-hidden="true"></span>
-                            <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
+                            <span id="firstIdUsernameFeedback" class="feedback feedback-user-name" aria-hidden="true"></span>
+                            <span id="firstIdFeedbackIcon" class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
                             <span id="firstStatus" class="sr-only">(success)</span>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div id="secondIdForm" class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
                                 <input type="text" asp-for="SearchedId" class="form-control" id="secondId" aria-describedby="secondStatus">
                             </div>
-                            <span class="feedback feedback-user-name" aria-hidden="true"></span>
-                            <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
+                            <span id="secondIdUsernameFeedback" class="feedback feedback-user-name" aria-hidden="true"></span>
+                            <span id="secondIdFeedbackIcon" class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
                             <span id="secondStatus" class="sr-only">(success)</span>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">Max path</span>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="slidecontainer">
                             <input asp-for="MaxPathLength" type="range" min="3" max="7" value="4" class="slider" id="myRange">
                         </div>
@@ -70,9 +70,14 @@
 <script>
     var firstId = document.getElementById("firstId");
     var firstIdForm = document.getElementById("firstIdForm");
+    var firstIdUsernameFeedback = document.getElementById("firstIdUsernameFeedback");
+    var firstIdFeedbackIcon = document.getElementById("firstIdFeedbackIcon");
+    
 
     var secondId = document.getElementById("secondId");
     var secondIdForm = document.getElementById("secondIdForm");
+    var secondIdUsernameFeedback = document.getElementById("secondIdUsernameFeedback");
+    var secondIdFeedbackIcon = document.getElementById("secondIdFeedbackIcon");
 
     var submitButton = document.getElementById("submitButton");
 
@@ -87,6 +92,12 @@
                     firstIdForm.classList.remove("has-success");
                     firstIdForm.classList.add("has-error");
 
+                    firstIdFeedbackIcon.classList.remove("glyphicon-ok");
+                    firstIdFeedbackIcon.classList.add("glyphicon-remove");
+
+                    firstIdUsernameFeedback.innerHTML = "";
+
+
                     firstIdSuccess = false;
 
                     submitButton.disabled = true;
@@ -96,6 +107,11 @@
 
                     firstIdForm.classList.add("has-success");
                     firstIdForm.classList.remove("has-error");
+
+                    firstIdFeedbackIcon.classList.add("glyphicon-ok");
+                    firstIdFeedbackIcon.classList.remove("glyphicon-remove");
+
+                    firstIdUsernameFeedback.innerHTML = users[0].first_name + ' ' + users[0].last_name;
 
                     firstIdSuccess = true;
                     if (secondIdSuccess == true)  submitButton.disabled = false;
@@ -111,6 +127,11 @@
                     secondIdForm.classList.remove("has-success");
                     secondIdForm.classList.add("has-error");
 
+                    secondIdFeedbackIcon.classList.remove("glyphicon-ok");
+                    secondIdFeedbackIcon.classList.add("glyphicon-remove");
+
+                    secondIdUsernameFeedback.innerHTML = "";
+
                     secondIdSuccess = false;
 
                     submitButton.disabled = true;
@@ -118,8 +139,13 @@
                 else {
                     users = users.concat(result.response);
 
-                    secondIdForm.classList.add("has-success");
+                    secondIdFeedbackIcon.classList.remove("glyphicon-remove");
+                    secondIdFeedbackIcon.classList.add("glyphicon-ok");
+
                     secondIdForm.classList.remove("has-error");
+                    secondIdForm.classList.add("has-success");
+
+                    secondIdUsernameFeedback.innerHTML = users[0].first_name + ' ' + users[0].last_name;
 
                     secondIdSuccess = true;
                     if (firstIdSuccess == true) submitButton.disabled = false;
