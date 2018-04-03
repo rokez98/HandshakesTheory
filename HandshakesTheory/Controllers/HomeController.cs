@@ -18,8 +18,10 @@ namespace HandshakesTheory.Controllers
         [HttpPost]
         public IActionResult Search(SearchModel searchModel)
         {
-            var graph = Vk.BuildSocialGraph(searchModel.UserId, searchModel.SearchedId, searchModel.MaxPathLength);
-            var answers = graph.searchAllPathes(searchModel.UserId, searchModel.SearchedId);
+            int userId, searchedId;
+
+            var graph = Vk.BuildSocialGraph(searchModel.UserId, searchModel.SearchedId, searchModel.MaxPathLength, out userId, out searchedId);
+            var answers = graph.searchAllPathes(userId, searchedId);
 
             return View(answers);
         }

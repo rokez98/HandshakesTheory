@@ -7,8 +7,8 @@ namespace HandshakesTheory.Models
 {
     public class SearchModel
     {
-        public int UserId { get; set; }
-        public int SearchedId { get; set; }
+        public string UserId { get; set; }
+        public string SearchedId { get; set; }
         public int MaxPathLength { get; set; }
     }
 }

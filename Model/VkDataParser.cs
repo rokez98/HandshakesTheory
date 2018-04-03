@@ -20,6 +20,16 @@ namespace HandshakesTheory.Models
                                             parsedResponse["items"].Select(user => new VkUser(int.Parse((string)user))).ToList();
         }
 
+        public VkUser parseGetUserInfo(string response)
+        {
+            JToken parsedResponse = Parse(response);
+
+            return parsedResponse == null ? null :
+                                            new VkUser( int.Parse((string)parsedResponse.First["uid"]),
+                                                        (string)parsedResponse.First["first_name"],
+                                                        (string)parsedResponse.First["last_name"]);
+        }
+
         public IEnumerable<VkUser> parseUsers(string response)
         {
             JToken parsedResponse = Parse(response);

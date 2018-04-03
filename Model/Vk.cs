@@ -13,7 +13,23 @@ namespace HandshakesTheory.Models
 
         static string makeFriendsRequestString(int id) { return "https://api.vk.com/method/friends.get?v=5.73&user_id=" + id; }
 
-        static string makeFriendsFullRequestString(int id) { return "https://api.vk.com/method/friends.get?v=5.73&fields=id&language=en&user_id=" + id; }
+        static string makeFriendsFullRequestString(int id) { return "https://api.vk.com/method/friends.get?v=5.73&fields=id&user_id=" + id; }
+
+        static string makeUserInfoRequestString<T>(T id) { return "https://api.vk.com/method/users.get?v=fuckvk&uids=" + id; }
+
+        private static int GetTrueId(string id)
+        {
+            List<VkUser> response = new List<VkUser>();
+
+            List<Task> taskList = new List<Task>();
+                taskList.Add(DownloadGetUsersInfo(id).ContinueWith(task => response.Add(dataParser.parseGetUserInfo(task.Result))));
+            Task.WaitAll(taskList.ToArray());
+
+
+            return response.First().Id;
+        }
+
+
 
         private static Graph MakeUsersSocialGraph(int userId, int populationLimit, TreeType treeType)
         {
@@ -22,33 +38,28 @@ namespace HandshakesTheory.Models
             SortedSet<int> toDownloadList = new SortedSet<int>();
             toDownloadList.Add(userId);
 
-            for (int i = 0; i < populationLimit; i++)
+            var friendsOfFriends = Vk.DownloadFriendsIds(toDownloadList);
+
+            foreach (var friendsList in friendsOfFriends)
             {
-                var friendsOfFriends = Vk.DownloadFriendsIds(toDownloadList);
+                var friendId = friendsList.Key;
+                var friendsOfFriendIds = friendsList.Value;
 
-                foreach (var friendsList in friendsOfFriends)
+                graph.AddNode(friendId, treeType == TreeType.Normal ? 0 : 100);
+
+                foreach (var friend in friendsOfFriendIds)
                 {
-                    var friendId = friendsList.Key;
-                    var friendsOfFriendIds = friendsList.Value;
+                    graph.AddNode(friend, treeType == TreeType.Normal ? 1 : 100 - 1);
 
-                    graph.AddNode(friendId, treeType == TreeType.Normal ? i : 100 - i);
+                    if (treeType == TreeType.Normal)
+                        graph.AddLink(friendsList.Key, friend.Id);
+                    else
+                        graph.AddLink(friend.Id, friendsList.Key);
 
-                    foreach (var friend in friendsOfFriendIds)
-                    {
-                        graph.AddNode(friend, treeType == TreeType.Normal ? i + 1 : 100 - i - 1);
-
-                        if (treeType == TreeType.Normal)
-                            graph.AddLink(friendsList.Key, friend.Id);
-                        else
-                            graph.AddLink(friend.Id, friendsList.Key);
-
-                        toDownloadList.Add(friend.Id);
-                    }
+                    toDownloadList.Add(friend.Id);
                 }
-                graph.Depth = i + 1;
-                if (!toDownloadList.Any()) break;
             }
-
+            graph.Depth = 1;
 
             return graph;
         }
@@ -80,8 +91,11 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        public static Graph BuildSocialGraph(int userId, int searchedId, int maximalDepth)
+        public static Graph BuildSocialGraph(string sUserId, string sSearchedId, int maximalDepth, out int digitalUserId, out int digitalSearchedId)
         {
+            int userId = GetTrueId(sUserId);
+            int searchedId = GetTrueId(sSearchedId);
+
             var normalGraph = Vk.MakeUsersSocialGraph(userId, 1, TreeType.Normal);
             var reversedGraph = Vk.MakeUsersSocialGraph(searchedId, 1, TreeType.Reversed);
 
@@ -96,7 +110,15 @@ namespace HandshakesTheory.Models
 
             var graph = Graph.Merge(normalGraph, reversedGraph);
 
+            digitalUserId = userId;
+            digitalSearchedId = searchedId;
+
             return graph;
+        }
+
+        public static async Task<string> DownloadGetUsersInfo(string id)
+        {
+            return await dataLoader.DownloadDataAsync(makeUserInfoRequestString(id));
         }
 
         public static async Task<string> DownloadUserInfo(int id)
@@ -114,7 +136,6 @@ namespace HandshakesTheory.Models
             List<Task> taskList = new List<Task>();
             foreach (var id in userIds)
                 taskList.Add(DownloadUserInfo(id).ContinueWith(task => response.Add(id, dataParser.parseUsers(task.Result))));
-
             Task.WaitAll(taskList.ToArray());
 
             watch.Stop();
