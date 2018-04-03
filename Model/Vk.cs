@@ -17,7 +17,7 @@ namespace HandshakesTheory.Models
 
         static string makeUserInfoRequestString<T>(T id) { return "https://api.vk.com/method/users.get?v=fuckvk&uids=" + id; }
 
-        private static int GetTrueId(string id)
+        private static int? GetTrueId(string id)
         {
             List<VkUser> response = new List<VkUser>();
 
@@ -26,7 +26,7 @@ namespace HandshakesTheory.Models
             Task.WaitAll(taskList.ToArray());
 
 
-            return response.First().Id;
+            return response?.First().Id;
         }
 
 
@@ -93,11 +93,13 @@ namespace HandshakesTheory.Models
 
         public static Graph BuildSocialGraph(string sUserId, string sSearchedId, int maximalDepth, out int digitalUserId, out int digitalSearchedId)
         {
-            int userId = GetTrueId(sUserId);
-            int searchedId = GetTrueId(sSearchedId);
+            int? userId = GetTrueId(sUserId);
+            int? searchedId = GetTrueId(sSearchedId);
 
-            var normalGraph = Vk.MakeUsersSocialGraph(userId, 1, TreeType.Normal);
-            var reversedGraph = Vk.MakeUsersSocialGraph(searchedId, 1, TreeType.Reversed);
+            if (userId == null || searchedId == null) throw new ArgumentNullException("Wrong id value!");
+
+            var normalGraph = Vk.MakeUsersSocialGraph(userId.Value, 1, TreeType.Normal);
+            var reversedGraph = Vk.MakeUsersSocialGraph(searchedId.Value, 1, TreeType.Reversed);
 
             int currentDepth = 3;
 
@@ -110,8 +112,8 @@ namespace HandshakesTheory.Models
 
             var graph = Graph.Merge(normalGraph, reversedGraph);
 
-            digitalUserId = userId;
-            digitalSearchedId = searchedId;
+            digitalUserId = userId.Value;
+            digitalSearchedId = searchedId.Value;
 
             return graph;
         }

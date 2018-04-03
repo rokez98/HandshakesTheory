@@ -20,10 +20,16 @@ namespace HandshakesTheory.Controllers
         {
             int userId, searchedId;
 
-            var graph = Vk.BuildSocialGraph(searchModel.UserId, searchModel.SearchedId, searchModel.MaxPathLength, out userId, out searchedId);
-            var answers = graph.searchAllPathes(userId, searchedId);
-
-            return View(answers);
+            try
+            {
+                var graph = Vk.BuildSocialGraph(searchModel.UserId, searchModel.SearchedId, searchModel.MaxPathLength, out userId, out searchedId);
+                var answers = graph.searchAllPathes(userId, searchedId);
+                return View(answers);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex.Message);
+            }
         }
 
         public IActionResult About()
