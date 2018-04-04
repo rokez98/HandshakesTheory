@@ -102,7 +102,7 @@
 
     firstId.oninput = function () {
         var users = [];
-        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + firstId.value + '&fields=sex,bdate,photo_100,education&callback=?',
+        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + this.value + '&fields=bdate,photo_100,education&callback=?',
             function (result) {
                 if (result.error) {
                     firstIdForm.classList.remove("has-success");

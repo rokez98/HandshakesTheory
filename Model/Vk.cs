@@ -11,27 +11,9 @@ namespace HandshakesTheory.Models
         public static IVkDataLoader dataLoader = new VkDataLoader();
         public static IVkDataParser dataParser = new VkDataParser();
 
-        static string makeFriendsRequestString(int id) { return "https://api.vk.com/method/friends.get?v=5.73&user_id=" + id; }
-
         static string makeFriendsFullRequestString(int id) { return "https://api.vk.com/method/friends.get?v=5.73&fields=id&user_id=" + id; }
 
-        static string makeUserInfoRequestString<T>(T id) { return "https://api.vk.com/method/users.get?v=fuckvk&uids=" + id; }
-
-        private static int? GetTrueId(string id)
-        {
-            List<VkUser> response = new List<VkUser>();
-
-            List<Task> taskList = new List<Task>();
-                taskList.Add(DownloadGetUsersInfo(id).ContinueWith(task => response.Add(dataParser.parseGetUserInfo(task.Result))));
-            Task.WaitAll(taskList.ToArray());
-
-
-            return response?.First().Id;
-        }
-
-
-
-        private static Graph MakeUsersSocialGraph(VkUser user, int populationLimit, TreeType treeType)
+        private static Graph MakeUsersSocialGraph(VkUser user, TreeType treeType)
         {
             Graph graph = new Graph();
 
@@ -93,8 +75,8 @@ namespace HandshakesTheory.Models
 
         public static Graph BuildSocialGraph(VkUser firstUser, VkUser secondUser, int maximalDepth)
         {
-            var normalGraph = Vk.MakeUsersSocialGraph(firstUser, 1, TreeType.Normal);
-            var reversedGraph = Vk.MakeUsersSocialGraph(secondUser, 1, TreeType.Reversed);
+            var normalGraph = Vk.MakeUsersSocialGraph(firstUser, TreeType.Normal);
+            var reversedGraph = Vk.MakeUsersSocialGraph(secondUser, TreeType.Reversed);
 
             int currentDepth = 3;
 
@@ -110,10 +92,7 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        public static async Task<string> DownloadGetUsersInfo(string id)
-        {
-            return await dataLoader.DownloadDataAsync(makeUserInfoRequestString(id));
-        }
+
 
         public static async Task<string> DownloadUserInfo(int id)
         {

@@ -30,18 +30,18 @@
             <div class="result-panel active" id="write">
                 <ul class="list-group">
                     @foreach (var answer in Model)
-            {
-                <li class="list-group-item">
-                    <div class="item-row">
-                        @foreach (var user in answer)
-                {
-                    <div class="item-cell">
-                        <a target="_blank" href="@string.Format("https://vk.com/id{0}",user.Id)" title="">@user.FirstName @user.LastName</a>
-                    </div>
-        }
-                    </div>
-                </li>
-    }
+                    {
+                    <li class="list-group-item">
+                        <div class="item-row">
+                            @foreach (var user in answer)
+                             {
+                                <div class="item-cell">
+                                    <a target="_blank" href="@string.Format("https://vk.com/id{0}",user.Id)" title="">@user.FirstName @user.LastName</a>
+                                </div>
+                         }
+                        </div>
+                    </li>
+                    }
                 </ul>
             </div>
 </center>
