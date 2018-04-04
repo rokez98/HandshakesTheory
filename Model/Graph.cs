@@ -11,7 +11,7 @@ namespace HandshakesTheory.Models
 
     public class Graph<T>
     {
-        public struct Node<T>
+        struct Node<T>
         {
             public T Data;
             public long Depth;
@@ -24,8 +24,6 @@ namespace HandshakesTheory.Models
                 this.Edges = new SortedSet<int>();
             }
         }
-
-
 
         public int Depth { get; set; }
         public int Size { get => graph.Count; }
