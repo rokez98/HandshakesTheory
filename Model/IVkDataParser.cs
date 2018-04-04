@@ -8,8 +8,6 @@ namespace HandshakesTheory.Models
 {
     public interface IVkDataParser
     {
-        IEnumerable<VkUser> parseFriends(string response);
-        VkUser parseGetUserInfo(string response);
         IEnumerable<VkUser> parseUsers(string response);
     }
 }

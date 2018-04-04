@@ -11,7 +11,7 @@ namespace HandshakesTheory.Models
         public static IVkDataLoader dataLoader = new VkDataLoader();
         public static IVkDataParser dataParser = new VkDataParser();
 
-        static string makeFriendsFullRequestString(int id) { return "https://api.vk.com/method/friends.get?v=5.73&fields=id&user_id=" + id; }
+        static string makeFriendsFullRequestString(int id) { return "https://api.vk.com/method/friends.get?v=5.73&fields=photo&user_id=" + id; }
 
         private static Graph MakeUsersSocialGraph(VkUser user, TreeType treeType)
         {

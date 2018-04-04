@@ -7,7 +7,7 @@ namespace HandshakesTheory.Models
     public class VkDataParser : IVkDataParser
     {
 
-        JToken Parse(string response)
+        private JToken Parse(string response)
         {
             return JToken.Parse(response)["response"];
         }
@@ -39,7 +39,8 @@ namespace HandshakesTheory.Models
                                             new VkUser(
                                             id: int.Parse((string)user["id"]),
                                             firstName: (string)user["first_name"],
-                                            lastName: (string)user["last_name"])).ToList();
+                                            lastName: (string)user["last_name"],
+                                            photoUrl: (string)user["photo"])).ToList();
         }
     }
 }

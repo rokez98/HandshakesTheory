@@ -17,6 +17,7 @@
                                 <input type="hidden" asp-for="FirstUser.Id" id="firstUserId" />
                                 <input type="hidden" asp-for="FirstUser.FirstName" id="firstUserFirstName" />
                                 <input type="hidden" asp-for="FirstUser.LastName" id="firstUserLastName" />
+                                <input type="hidden" asp-for="FirstUser.PhotoUrl" id="firstUserPhotoUrl" />
                             </div>
                             <span id="firstIdUsernameFeedback" class="feedback feedback-user-name" aria-hidden="true"></span>
                             <span id="firstIdFeedbackIcon" class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
@@ -31,6 +32,7 @@
                                 <input type="hidden" asp-for="SecondUser.Id" id="secondUserId" />
                                 <input type="hidden" asp-for="SecondUser.FirstName" id="secondUserFirstName" />
                                 <input type="hidden" asp-for="SecondUser.LastName" id="secondUserLastName" />
+                                <input type="hidden" asp-for="SecondUser.PhotoUrl" id="secondUserPhotoUrl" />
                             </div>
                             <span id="secondIdUsernameFeedback" class="feedback feedback-user-name" aria-hidden="true"></span>
                             <span id="secondIdFeedbackIcon" class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
@@ -79,6 +81,7 @@
     var firstUserId = document.getElementById("firstUserId");
     var firstUserFirstName = document.getElementById("firstUserFirstName");
     var firstUserLastName = document.getElementById("firstUserLastName");
+    var firstUserPhotoUrl = document.getElementById("firstUserPhotoUrl");
 
 
     var firstIdForm = document.getElementById("firstIdForm");
@@ -89,6 +92,7 @@
     var secondId = document.getElementById("secondId");
     var secondUserFirstName = document.getElementById("secondUserFirstName");
     var secondUserLastName = document.getElementById("secondUserLastName");
+    var secondUserPhotoUrl = document.getElementById("secondUserPhotoUrl");
 
     var secondUserId = document.getElementById("secondUserId");
     var secondIdForm = document.getElementById("secondIdForm");
@@ -102,7 +106,7 @@
 
     firstId.oninput = function () {
         var users = [];
-        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + this.value + '&fields=bdate,photo_100,education&callback=?',
+        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + this.value + '&fields=bdate,photo,education&callback=?',
             function (result) {
                 if (result.error) {
                     firstIdForm.classList.remove("has-success");
@@ -124,6 +128,7 @@
                     firstUserId.value = users[0].uid;
                     firstUserFirstName.value = users[0].first_name;
                     firstUserLastName.value = users[0].last_name;
+                    firstUserPhotoUrl.value = users[0].photo;
 
                     firstIdForm.classList.add("has-success");
                     firstIdForm.classList.remove("has-error");
@@ -141,7 +146,7 @@
 
     secondId.oninput = function () {
         var users = [];
-        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + secondId.value + '&fields=sex,bdate,photo_100,education&callback=?',
+        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + secondId.value + '&fields=sex,bdate,photo,education&callback=?',
             function (result) {
                 if (result.error) {
                     secondIdForm.classList.remove("has-success");
@@ -162,6 +167,7 @@
                     secondUserId.value = users[0].uid;
                     secondUserFirstName.value = users[0].first_name;
                     secondUserLastName.value = users[0].last_name;
+                    secondUserPhotoUrl.value = users[0].photo;
 
 
                     secondIdFeedbackIcon.classList.remove("glyphicon-remove");
