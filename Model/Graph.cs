@@ -9,50 +9,47 @@ namespace HandshakesTheory.Models
         Reversed
     }
 
-    public struct Node
+    public struct Node<T>
     {
-        public VkUser User;
+        public T User;
+
         public long Level;
+        public SortedSet<int> Edges;
 
-        public Node(int id, long lvl)
-        {
-            User = new VkUser(id);
-            this.Level = lvl;
-        }
-
-        public Node(VkUser user, long lvl)
+        public Node(T user, long lvl)
         {
             User = user;
             this.Level = lvl;
+            Edges = new SortedSet<int>();
         }
     }
 
-    public class Graph
+    public class Graph<T>
     {
         public int Depth { get; set; }
         public int Size { get => socialGraph.Count; }
 
-        private Dictionary<int, Node> socialGraph = new Dictionary<int, Node>();
+        private Dictionary<int, Node<T>> socialGraph = new Dictionary<int, Node<T>>();
 
-        public void AddNode(VkUser user, int depth)
+        public void AddNode(int key,T user, int depth)
         {
-            if (!socialGraph.ContainsKey(user.Id)) socialGraph.Add(user.Id, new Node(user, depth));
+            if (!socialGraph.ContainsKey(key)) socialGraph.Add(key, new Node<T>(user, depth));
         }
 
         public void AddLink(int from, int to)
         {
-            if (socialGraph.ContainsKey(from) && socialGraph[from].Level < socialGraph[to].Level) socialGraph[from].User.FriendsList.Add(to);
+            if (socialGraph.ContainsKey(from) && socialGraph[from].Level < socialGraph[to].Level) socialGraph[from].Edges.Add(to);
         }
 
         private List<int> path = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-        private List<VkUser[]> answers = new List<VkUser[]>();
+        private List<T[]> answers = new List<T[]>();
 
         public void makeAnswer(int population)
         {
             answers.Add(path.Take(population + 1).Select(id => socialGraph[id].User).ToArray());
         }
 
-        public List<VkUser[]> searchAllPathes(int from, int to)
+        public List<T[]> searchAllPathes(int from, int to)
         {
             DFS(from, to, 0);
 
@@ -67,16 +64,20 @@ namespace HandshakesTheory.Models
 
             if (currentUserId == searchedId) makeAnswer(population);
 
-            Node currentUserNode = socialGraph[currentUserId];
+            Node<T> currentUserNode = socialGraph[currentUserId];
 
-            foreach (var child in currentUserNode.User.FriendsList)
+            foreach (var child in currentUserNode.Edges)
                 DFS((int)child, searchedId, population + 1);
         }
 
-
-        public static Graph Merge(Graph graphNormal, Graph graphReversed)
+        public IEnumerable<T> getNodesOfLevel(int level)
         {
-            Graph graph = new Graph();
+            return socialGraph.Where(node => node.Value.Level == level).Select(node => node.Value.User);
+        }
+
+        public static Graph<T> Merge(Graph<T> graphNormal, Graph<T> graphReversed)
+        {
+            Graph<T> graph = new Graph<T>();
 
             foreach (var node in graphNormal.socialGraph)
             {
@@ -88,8 +89,8 @@ namespace HandshakesTheory.Models
                 if (!graph.socialGraph.ContainsKey(node.Key)) graph.socialGraph.Add(node.Key, node.Value);
                 else
                 {
-                    foreach (var nodeChildId in node.Value.User.FriendsList)
-                        graph.socialGraph[node.Key].User.FriendsList.Add(nodeChildId);
+                    foreach (var nodeChildId in node.Value.Edges)
+                        graph.socialGraph[node.Key].Edges.Add(nodeChildId);
                 }
             }
 
@@ -97,11 +98,5 @@ namespace HandshakesTheory.Models
 
             return graph;
         }
-
-        public IEnumerable<int> getUsersIdsOfLevel(int level)
-        {
-            return socialGraph.Where(node => node.Value.Level == level).Select(node => node.Value.User.Id);
-        }
-
     }
 }

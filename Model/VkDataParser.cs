@@ -6,33 +6,19 @@ namespace HandshakesTheory.Models
 {
     public class VkDataParser : IVkDataParser
     {
-
-        private JToken Parse(string response)
-        {
-            return JToken.Parse(response)["response"];
-        }
+        private JToken getResponseSection(string response) => JToken.Parse(response)["response"];
 
         public IEnumerable<VkUser> parseFriends(string response)
         {
-            JToken parsedResponse = Parse(response);
+            JToken parsedResponse = getResponseSection(response);
 
             return parsedResponse == null ? Enumerable.Empty<VkUser>() :
                                             parsedResponse["items"].Select(user => new VkUser(int.Parse((string)user))).ToList();
         }
 
-        public VkUser parseGetUserInfo(string response)
-        {
-            JToken parsedResponse = Parse(response);
-
-            return parsedResponse == null ? null :
-                                            new VkUser( int.Parse((string)parsedResponse.First["uid"]),
-                                                        (string)parsedResponse.First["first_name"],
-                                                        (string)parsedResponse.First["last_name"]);
-        }
-
         public IEnumerable<VkUser> parseUsers(string response)
         {
-            JToken parsedResponse = Parse(response);
+            JToken parsedResponse = getResponseSection(response);
 
             return parsedResponse == null ? Enumerable.Empty<VkUser>() :
                                             parsedResponse["items"].Select(user => 

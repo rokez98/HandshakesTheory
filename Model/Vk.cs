@@ -11,11 +11,11 @@ namespace HandshakesTheory.Models
         public static IVkDataLoader dataLoader = new VkDataLoader();
         public static IVkDataParser dataParser = new VkDataParser();
 
-        static string makeFriendsFullRequestString(int id) { return "https://api.vk.com/method/friends.get?v=5.73&fields=photo&user_id=" + id; }
+        static string makeFriendsFullRequestString(int id) => "https://api.vk.com/method/friends.get?v=5.73&fields=photo&user_id=" + id;
 
-        private static Graph MakeUsersSocialGraph(VkUser user, TreeType treeType)
+        private static Graph<VkUser> BuildUsersSocialGraph(VkUser user, TreeType treeType)
         {
-            Graph graph = new Graph();
+            Graph<VkUser> graph = new Graph<VkUser>();
 
             SortedSet<int> toDownloadList = new SortedSet<int>();
             toDownloadList.Add(user.Id);
@@ -27,11 +27,11 @@ namespace HandshakesTheory.Models
                 var friendId = friendsList.Key;
                 var friendsOfFriendIds = friendsList.Value;
 
-                graph.AddNode(user, treeType == TreeType.Normal ? 0 : 100);
+                graph.AddNode(user.Id, user, treeType == TreeType.Normal ? 0 : 100);
 
                 foreach (var friend in friendsOfFriendIds)
                 {
-                    graph.AddNode(friend, treeType == TreeType.Normal ? 1 : 100 - 1);
+                    graph.AddNode(friend.Id, friend, treeType == TreeType.Normal ? 1 : 100 - 1);
 
                     if (treeType == TreeType.Normal)
                         graph.AddLink(friendsList.Key, friend.Id);
@@ -46,9 +46,9 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        private static Graph IncreaseDepthOfUsersSocialGraph(Graph graph, TreeType treeType)
+        private static Graph<VkUser> IncreaseDepthOfUsersSocialGraph(Graph<VkUser> graph, TreeType treeType)
         {
-            var toDownloadList = graph.getUsersIdsOfLevel(treeType == TreeType.Normal ? graph.Depth : 100 - graph.Depth);
+            var toDownloadList = Vk.getUsersIdsOfLevel(graph, treeType == TreeType.Normal ? graph.Depth : 100 - graph.Depth);
 
             var friendsOfFriends = Vk.DownloadFriendsIds(toDownloadList);
 
@@ -59,7 +59,7 @@ namespace HandshakesTheory.Models
 
                 foreach (var friend in friendsOfFriendIds)
                 {
-                    graph.AddNode(friend, treeType == TreeType.Normal ? graph.Depth + 1 : 100 - graph.Depth - 1);
+                    graph.AddNode(friend.Id, friend, treeType == TreeType.Normal ? graph.Depth + 1 : 100 - graph.Depth - 1);
 
                     if (treeType == TreeType.Normal)
                         graph.AddLink(friendsList.Key, friend.Id);
@@ -73,10 +73,10 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        public static Graph BuildSocialGraph(VkUser firstUser, VkUser secondUser, int maximalDepth)
+        public static Graph<VkUser> BuildSocialGraph(VkUser firstUser, VkUser secondUser, int maximalDepth)
         {
-            var normalGraph = Vk.MakeUsersSocialGraph(firstUser, TreeType.Normal);
-            var reversedGraph = Vk.MakeUsersSocialGraph(secondUser, TreeType.Reversed);
+            var normalGraph = Vk.BuildUsersSocialGraph(firstUser, TreeType.Normal);
+            var reversedGraph = Vk.BuildUsersSocialGraph(secondUser, TreeType.Reversed);
 
             int currentDepth = 3;
 
@@ -87,17 +87,15 @@ namespace HandshakesTheory.Models
                 currentDepth++;
             }
 
-            var graph = Graph.Merge(normalGraph, reversedGraph);
+            var graph = Graph<VkUser>.Merge(normalGraph, reversedGraph);
 
             return graph;
         }
 
 
+        public static IEnumerable<int> getUsersIdsOfLevel(Graph<VkUser> graph, int level) => graph.getNodesOfLevel(level).Select(node => node.Id);
 
-        public static async Task<string> DownloadUserInfo(int id)
-        {
-            return await dataLoader.DownloadDataAsync(makeFriendsFullRequestString(id));
-        }
+        public static async Task<string> DownloadUserInfo(int id) => await dataLoader.DownloadDataAsync(makeFriendsFullRequestString(id));
 
         public static Dictionary<int, IEnumerable<VkUser>> DownloadFriendsIds(IEnumerable<int> userIds)
         {
