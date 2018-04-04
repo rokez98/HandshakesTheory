@@ -9,36 +9,37 @@ namespace HandshakesTheory.Models
         Reversed
     }
 
-    public struct Node<T>
-    {
-        public T User;
-
-        public long Level;
-        public SortedSet<int> Edges;
-
-        public Node(T user, long lvl)
-        {
-            User = user;
-            this.Level = lvl;
-            Edges = new SortedSet<int>();
-        }
-    }
-
     public class Graph<T>
     {
-        public int Depth { get; set; }
-        public int Size { get => socialGraph.Count; }
+        public struct Node<T>
+        {
+            public T Data;
+            public long Depth;
+            public SortedSet<int> Edges;
 
-        private Dictionary<int, Node<T>> socialGraph = new Dictionary<int, Node<T>>();
+            public Node(T data, long depth)
+            {
+                this.Data = data;
+                this.Depth = depth;
+                this.Edges = new SortedSet<int>();
+            }
+        }
+
+
+
+        public int Depth { get; set; }
+        public int Size { get => graph.Count; }
+
+        private Dictionary<int, Node<T>> graph = new Dictionary<int, Node<T>>();
 
         public void AddNode(int key,T user, int depth)
         {
-            if (!socialGraph.ContainsKey(key)) socialGraph.Add(key, new Node<T>(user, depth));
+            if (!graph.ContainsKey(key)) graph.Add(key, new Node<T>(user, depth));
         }
 
         public void AddLink(int from, int to)
         {
-            if (socialGraph.ContainsKey(from) && socialGraph[from].Level < socialGraph[to].Level) socialGraph[from].Edges.Add(to);
+            if (graph.ContainsKey(from) && graph[from].Depth < graph[to].Depth) graph[from].Edges.Add(to);
         }
 
         private List<int> path = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -46,7 +47,7 @@ namespace HandshakesTheory.Models
 
         public void makeAnswer(int population)
         {
-            answers.Add(path.Take(population + 1).Select(id => socialGraph[id].User).ToArray());
+            answers.Add(path.Take(population + 1).Select(id => graph[id].Data).ToArray());
         }
 
         public List<T[]> searchAllPathes(int from, int to)
@@ -56,47 +57,47 @@ namespace HandshakesTheory.Models
             return answers;
         }
 
-        private void DFS(int currentUserId, long searchedId, int population)
+        private void DFS(int startKey, long searchedKey, int depth)
         {
-            if (population > Depth) return;
+            if (depth > Depth) return;
 
-            path[population] = currentUserId;
+            path[depth] = startKey;
 
-            if (currentUserId == searchedId) makeAnswer(population);
+            if (startKey == searchedKey) makeAnswer(depth);
 
-            Node<T> currentUserNode = socialGraph[currentUserId];
+            Node<T> currentUserNode = graph[startKey];
 
             foreach (var child in currentUserNode.Edges)
-                DFS((int)child, searchedId, population + 1);
+                DFS((int)child, searchedKey, depth + 1);
         }
 
         public IEnumerable<T> getNodesOfLevel(int level)
         {
-            return socialGraph.Where(node => node.Value.Level == level).Select(node => node.Value.User);
+            return graph.Where(node => node.Value.Depth == level).Select(node => node.Value.Data);
         }
 
         public static Graph<T> Merge(Graph<T> graphNormal, Graph<T> graphReversed)
         {
-            Graph<T> graph = new Graph<T>();
+            Graph<T> mergedGraph = new Graph<T>();
 
-            foreach (var node in graphNormal.socialGraph)
+            foreach (var node in graphNormal.graph)
             {
-                graph.socialGraph.Add(node.Key, node.Value);
+                mergedGraph.graph.Add(node.Key, node.Value);
             }
 
-            foreach (var node in graphReversed.socialGraph)
+            foreach (var node in graphReversed.graph)
             {
-                if (!graph.socialGraph.ContainsKey(node.Key)) graph.socialGraph.Add(node.Key, node.Value);
+                if (!mergedGraph.graph.ContainsKey(node.Key)) mergedGraph.graph.Add(node.Key, node.Value);
                 else
                 {
                     foreach (var nodeChildId in node.Value.Edges)
-                        graph.socialGraph[node.Key].Edges.Add(nodeChildId);
+                        mergedGraph.graph[node.Key].Edges.Add(nodeChildId);
                 }
             }
 
-            graph.Depth = graphNormal.Depth + graphReversed.Depth;
+            mergedGraph.Depth = graphNormal.Depth + graphReversed.Depth;
 
-            return graph;
+            return mergedGraph;
         }
     }
 }
