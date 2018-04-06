@@ -9,37 +9,41 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div id="firstIdForm" class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
                                 <input type="text" class="form-control" id="firstId" aria-describedby="firstStatus">
-                                <input type="hidden" asp-for="FirstUser.Id" id="firstUserId" />
-                                <input type="hidden" asp-for="FirstUser.FirstName" id="firstUserFirstName" />
-                                <input type="hidden" asp-for="FirstUser.LastName" id="firstUserLastName" />
-                                <input type="hidden" asp-for="FirstUser.PhotoUrl" id="firstUserPhotoUrl" />
+                                <input class="Id" type="hidden" asp-for="FirstUser.Id"/>
+                                <input class="FirstName" type="hidden" asp-for="FirstUser.FirstName"/>
+                                <input class="LastName" type="hidden" asp-for="FirstUser.LastName"/>
+                                <input class="Photo" type="hidden" asp-for="FirstUser.PhotoUrl"/>
                             </div>
-                            <span id="firstIdUsernameFeedback" class="feedback feedback-user-name" aria-hidden="true"></span>
-                            <span id="firstIdFeedbackIcon" class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
-                            <span id="firstStatus" class="sr-only">(success)</span>
+                            <span class="feedback feedback-user-name" aria-hidden="true"></span>
+                            <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
+                            <span class="sr-only">(success)</span>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div id="secondIdForm" class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">vk.com/</span>
                                 <input type="text" class="form-control" id="secondId" aria-describedby="secondStatus">
-                                <input type="hidden" asp-for="SecondUser.Id" id="secondUserId" />
-                                <input type="hidden" asp-for="SecondUser.FirstName" id="secondUserFirstName" />
-                                <input type="hidden" asp-for="SecondUser.LastName" id="secondUserLastName" />
-                                <input type="hidden" asp-for="SecondUser.PhotoUrl" id="secondUserPhotoUrl" />
+                                <input class="Id" type="hidden" asp-for="SecondUser.Id"/>
+                                <input class="FirstName" type="hidden" asp-for="SecondUser.FirstName"/>
+                                <input class="LastName" type="hidden" asp-for="SecondUser.LastName"/>
+                                <input class="Photo" type="hidden" asp-for="SecondUser.PhotoUrl"/>
                             </div>
-                            <span id="secondIdUsernameFeedback" class="feedback feedback-user-name" aria-hidden="true"></span>
-                            <span id="secondIdFeedbackIcon" class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
-                            <span id="secondStatus" class="sr-only">(success)</span>
+                            <span class="feedback feedback-user-name" aria-hidden="true"></span>
+                            <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
+                            <span class="sr-only">(success)</span>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <span class="input-group-addon">Max path</span>
@@ -47,7 +51,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="slidecontainer">
                             <input asp-for="MaxPathLength" type="range" min="3" max="7" value="4" class="slider" id="myRange">
                         </div>
@@ -56,7 +62,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group btn-group search-button">
-                            <input type="submit" class="btn btn-primary" id="submitButton" data-toggle="modal" data-target="#startModal" disabled="disabled">
+                            <input type="submit" class="btn btn-primary" id="submitButton" data-toggle="modal" data-target="#startModal">
                         </div>
                     </div>
                 </div>
@@ -76,112 +82,62 @@
 </script>
 
 <script>
-    var firstId = document.getElementById("firstId");
+    function makeRequestUrl(id) {
+        return 'https://api.vk.com/method/users.get?v=fuckvk&uids=' + id + '&fields=bdate,photo,education&callback=?';
+    }
 
-    var firstUserId = document.getElementById("firstUserId");
-    var firstUserFirstName = document.getElementById("firstUserFirstName");
-    var firstUserLastName = document.getElementById("firstUserLastName");
-    var firstUserPhotoUrl = document.getElementById("firstUserPhotoUrl");
+    function validateId() {
+        var users = [];
 
+        var Form = this.parentElement.parentElement;
+        var FeedbackIcon = Form.getElementsByClassName('feedback-icon')[0];
+        var FeedbackUsername = Form.getElementsByClassName('feedback-user-name')[0];
+        var Id = Form.getElementsByClassName('Id')[0];
+        var FirstName = Form.getElementsByClassName('FirstName')[0];
+        var LastName = Form.getElementsByClassName('LastName')[0];
+        var Photo = Form.getElementsByClassName('Photo')[0];
 
-    var firstIdForm = document.getElementById("firstIdForm");
-    var firstIdUsernameFeedback = document.getElementById("firstIdUsernameFeedback");
-    var firstIdFeedbackIcon = document.getElementById("firstIdFeedbackIcon");
-    
+        $.getJSON(makeRequestUrl(this.value),
+            function (result) {
+                if (result.error) {
+                    Form.classList.remove("has-success");
+                    Form.classList.add("has-error");
 
-    var secondId = document.getElementById("secondId");
-    var secondUserFirstName = document.getElementById("secondUserFirstName");
-    var secondUserLastName = document.getElementById("secondUserLastName");
-    var secondUserPhotoUrl = document.getElementById("secondUserPhotoUrl");
+                    FeedbackIcon.classList.remove("glyphicon-ok");
+                    FeedbackIcon.classList.add("glyphicon-remove");
 
-    var secondUserId = document.getElementById("secondUserId");
-    var secondIdForm = document.getElementById("secondIdForm");
-    var secondIdUsernameFeedback = document.getElementById("secondIdUsernameFeedback");
-    var secondIdFeedbackIcon = document.getElementById("secondIdFeedbackIcon");
+                    FeedbackUsername.innerText = "";
+                }
+                else {
+                    users = users.concat(result.response);
+
+                    Id.value = users[0].uid;
+                    FirstName.value = users[0].first_name;
+                    LastName.value = users[0].last_name;
+                    Photo.value = users[0].photo;
+
+                    Form.classList.add("has-success");
+                    Form.classList.remove("has-error");
+
+                    FeedbackIcon.classList.add("glyphicon-ok");
+                    FeedbackIcon.classList.remove("glyphicon-remove");
+
+                    FeedbackUsername.innerHTML = users[0].first_name + ' ' + users[0].last_name;
+                }
+            });
+    }
 
     var submitButton = document.getElementById("submitButton");
 
     var firstIdSuccess = false;
     var secondIdSuccess = false;
 
-    firstId.oninput = function () {
-        var users = [];
-        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + this.value + '&fields=bdate,photo,education&callback=?',
-            function (result) {
-                if (result.error) {
-                    firstIdForm.classList.remove("has-success");
-                    firstIdForm.classList.add("has-error");
+    firstId.oninput = validateId;
+    secondId.oninput = validateId;
 
-                    firstIdFeedbackIcon.classList.remove("glyphicon-ok");
-                    firstIdFeedbackIcon.classList.add("glyphicon-remove");
-
-                    firstIdUsernameFeedback.innerText = "";
-
-
-                    firstIdSuccess = false;
-
-                    submitButton.disabled = true;
-                }
-                else {
-                    users = users.concat(result.response);
-
-                    firstUserId.value = users[0].uid;
-                    firstUserFirstName.value = users[0].first_name;
-                    firstUserLastName.value = users[0].last_name;
-                    firstUserPhotoUrl.value = users[0].photo;
-
-                    firstIdForm.classList.add("has-success");
-                    firstIdForm.classList.remove("has-error");
-
-                    firstIdFeedbackIcon.classList.add("glyphicon-ok");
-                    firstIdFeedbackIcon.classList.remove("glyphicon-remove");
-
-                    firstIdUsernameFeedback.innerHTML = users[0].first_name + ' ' + users[0].last_name;
-
-                    firstIdSuccess = true;
-                    if (secondIdSuccess == true)  submitButton.disabled = false;
-                }
-            });
-    }
-
-    secondId.oninput = function () {
-        var users = [];
-        $.getJSON('https://api.vk.com/method/users.get?v=fuckvk&uids=' + secondId.value + '&fields=sex,bdate,photo,education&callback=?',
-            function (result) {
-                if (result.error) {
-                    secondIdForm.classList.remove("has-success");
-                    secondIdForm.classList.add("has-error");
-
-                    secondIdFeedbackIcon.classList.remove("glyphicon-ok");
-                    secondIdFeedbackIcon.classList.add("glyphicon-remove");
-
-                    secondIdUsernameFeedback.innerHTML = "";
-
-                    secondIdSuccess = false;
-
-                    submitButton.disabled = true;
-                }
-                else {
-                    users = users.concat(result.response);
-
-                    secondUserId.value = users[0].uid;
-                    secondUserFirstName.value = users[0].first_name;
-                    secondUserLastName.value = users[0].last_name;
-                    secondUserPhotoUrl.value = users[0].photo;
-
-
-                    secondIdFeedbackIcon.classList.remove("glyphicon-remove");
-                    secondIdFeedbackIcon.classList.add("glyphicon-ok");
-
-                    secondIdForm.classList.remove("has-error");
-                    secondIdForm.classList.add("has-success");
-
-                    secondIdUsernameFeedback.innerHTML = users[0].first_name + ' ' + users[0].last_name;
-
-                    secondIdSuccess = true;
-                    if (firstIdSuccess == true) submitButton.disabled = false;
-                }
-            });
-    }
+    window.onload = function () {
+        validateId.call(document.getElementById('firstId'));
+        validateId.call(document.getElementById('secondId'));
+    };
 
 </script>

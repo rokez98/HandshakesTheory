@@ -30,10 +30,11 @@ namespace HandshakesTheory.Models
 
         private Dictionary<int, Node<T>> graph = new Dictionary<int, Node<T>>();
 
-        public void AddNode(int key,T user, int depth)
+        public void AddNode(int key, T user, int depth)
         {
             if (!graph.ContainsKey(key)) graph.Add(key, new Node<T>(user, depth));
         }
+       
 
         public void AddLink(int from, int to)
         {
@@ -51,14 +52,11 @@ namespace HandshakesTheory.Models
         public List<T[]> searchAllPathes(int from, int to)
         {
             DFS(from, to, 0);
-
             return answers;
         }
 
         private void DFS(int startKey, long searchedKey, int depth)
         {
-            if (depth > Depth) return;
-
             path[depth] = startKey;
 
             if (startKey == searchedKey) makeAnswer(depth);
@@ -66,7 +64,7 @@ namespace HandshakesTheory.Models
             Node<T> currentUserNode = graph[startKey];
 
             foreach (var child in currentUserNode.Edges)
-                DFS((int)child, searchedKey, depth + 1);
+                DFS(child, searchedKey, depth + 1);
         }
 
         public IEnumerable<T> getNodesOfLevel(int level)
@@ -79,22 +77,17 @@ namespace HandshakesTheory.Models
             Graph<T> mergedGraph = new Graph<T>();
 
             foreach (var node in graphNormal.graph)
-            {
                 mergedGraph.graph.Add(node.Key, node.Value);
-            }
 
             foreach (var node in graphReversed.graph)
-            {
                 if (!mergedGraph.graph.ContainsKey(node.Key)) mergedGraph.graph.Add(node.Key, node.Value);
                 else
                 {
                     foreach (var nodeChildId in node.Value.Edges)
                         mergedGraph.graph[node.Key].Edges.Add(nodeChildId);
                 }
-            }
 
             mergedGraph.Depth = graphNormal.Depth + graphReversed.Depth;
-
             return mergedGraph;
         }
     }
