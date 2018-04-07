@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandshakesTheory", "HandshakesTheory\HandshakesTheory.csproj", "{44249403-C8C0-40E4-95AE-AB0EB3DDD6CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandshakesTheory", "HandshakesTheory\HandshakesTheory.csproj", "{44249403-C8C0-40E4-95AE-AB0EB3DDD6CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandshakesTheory.Model", "Model\HandshakesTheory.Model.csproj", "{25C6EFA0-6EE3-48EA-8679-943F83952BBF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{62698438-9D6E-414F-A3B5-246AB61F73E0}"
+	ProjectSection(SolutionItems) = preProject
+		Graphics\Site.Index.png = Graphics\Site.Index.png
+		Graphics\Site.Index.psd = Graphics\Site.Index.psd
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
