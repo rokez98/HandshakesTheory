@@ -2,6 +2,7 @@ body {
     padding-top: 0px;
     padding-bottom: 0px;
     font-family: sans-serif;
+    color: #626262;
 }
 
 div {
@@ -52,6 +53,7 @@ li.list-group-item .item-row {
     display: table;
     width: 100%;
     table-layout: fixed;
+    padding-bottom: 10px;
 }
 
     li.list-group-item .item-row .item-cell {
@@ -203,12 +205,58 @@ li.list-group-item .item-row {
     padding: 10px 30px;
 }
 
+    .recommended-person img {
+        height: 90px;
+        border-radius: 1000px;
+    }
+
+.round {
+    height: 40px;
+    border-radius: 1000px;
+}
+
+.shortlist div a {
+    display: none;
+}
+
+.expanded {
+    background-color: #f0f0f0;
+    height: 220px;
+}
+
+    .expanded .user-photo {
+        height: 50px;
+    }
 
 
+    .expanded div a {
+        display: block;
+    }
+
+    .expanded .item-row .item-cell:nth-child(2n) {
+        position: relative;
+        top: 100px;
+        left: 0px;
+    }
+
+    .expanded .arrow-expand {
+        display: none;
+    }
+
+.shortlist .arrow-hide {
+    display: none;
+}
 
 footer {
     padding: 10px 0px;
     text-align: center;
     color: #626262;
     background: #f0f0f0;
+}
+
+
+li .arrow {
+    position: absolute;
+    bottom: 0px;
+    right: 5px;
 }

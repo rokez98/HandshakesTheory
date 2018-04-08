@@ -11,7 +11,7 @@
             @if (Model.Any())
             {
         <div>
-            <span>Вы знакомы через @Math.Abs(Model.First().Length - 2) пользователей</span>
+            <h2>You are linked by @Math.Abs(Model.First().Length - 2) handshakes</h2>
             <div>
                 @for (int i = 0; i < Model.First().Length - 2; i++)
                 {
@@ -31,17 +31,25 @@
                 <ul class="list-group">
                     @foreach (var answer in Model)
                     {
-                    <li class="list-group-item">
+                    <li class="list-group-item shortlist">
                         <div class="item-row">
                             @foreach (var user in answer)
-                             {
-                                <div class="item-cell">
-                                    <a target="_blank" href="@string.Format("https://vk.com/id{0}",user.Id)" title="">@user.FirstName @user.LastName</a>
-                                    <div>
-                                        <img src="@string.Format("{0}",user.PhotoUrl)" height="50" width="50"/>
-                                    </div>
+                            {
+                            <div class="item-cell">
+                                <a href="@string.Format("https://vk.com/id{0}", user.Id)" title="">@user.FirstName @user.LastName</a>
+                                <div>
+                                    <img class="user-photo round" src="@string.Format("{0}", user.PhotoUrl)" />
                                 </div>
-                         }
+                            </div>
+                            }
+                        </div>
+                        <div class="arrow arrow-expand" >
+                            Expand
+                            <img src="~/images/ExpandArrow.png" height="10" />
+                        </div>
+                        <div class="arrow arrow-hide">
+                            Hide
+                            <img src="~/images/HideArrow.png" height="10" />
                         </div>
                     </li>
                     }
@@ -49,4 +57,24 @@
             </div>
 </center>
 </div>
+
+<script>
+    var listItems = document.getElementsByClassName('arrow-expand');
+    for (var i = 0; i < listItems.length; i++) {
+        listItems[i].addEventListener('click', function () {
+            var parent = this.parentElement;
+            parent.classList.remove("shortlist");
+            parent.classList.add("expanded");
+        });
+    }
+
+    var listItems = document.getElementsByClassName('arrow-hide');
+    for (var i = 0; i < listItems.length; i++) {
+        listItems[i].addEventListener('click', function () {
+            var parent = this.parentElement;
+            parent.classList.add("shortlist");
+            parent.classList.remove("expanded");
+        });
+    }
+</script>
 
