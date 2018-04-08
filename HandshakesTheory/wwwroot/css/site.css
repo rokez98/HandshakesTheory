@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: sans-serif;
 }
 
 div {
@@ -53,10 +54,10 @@ li.list-group-item .item-row {
     table-layout: fixed;
 }
 
-li.list-group-item .item-row .item-cell {
-    display: table-cell;
-    text-align: center;
-}
+    li.list-group-item .item-row .item-cell {
+        display: table-cell;
+        text-align: center;
+    }
 
 *, :after, :before {
     -webkit-box-sizing: border-box;
@@ -77,23 +78,23 @@ li.list-group-item .item-row .item-cell {
     transition: opacity .2s;
 }
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #4CAF50;
-    cursor: pointer;
-}
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
 
-.slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #4CAF50;
-    cursor: pointer;
-}
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #4CAF50;
+        cursor: pointer;
+    }
 
 .feedback {
     position: absolute;
@@ -177,5 +178,29 @@ li.list-group-item .item-row .item-cell {
 }
 
 .form-control {
-    background-color: transparent;
+    background-color: #fcf8e3;
+}
+
+.input-id {
+    padding: 10px 0px;
+    background-color: #f0f0f0;
+    position: relative;
+}
+
+    .input-id:before {
+        background: url("../images/SocialNetwork.png") no-repeat;
+        background-position: center;
+        background-size: 350px 100%;
+        opacity: 0.15;
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        height: calc(100% - 20px);
+    }
+
+footer {
+    padding: 10px 0px;
+    text-align: center;
+    color: #626262;
+    background: #f0f0f0;
 }

@@ -179,3 +179,8 @@ li.list-group-item .item-row {
 .form-control {
     background-color: transparent;
 }
+
+.input-id {
+    background: url("../images/SocialNetwork.png");
+    background-color: #f0f0f0;
+}
