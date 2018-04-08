@@ -1,6 +1,7 @@
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-family: sans-serif;
 }
 
 div {
@@ -10,8 +11,8 @@ div {
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 /* Carousel */
@@ -177,10 +178,37 @@ li.list-group-item .item-row {
 }
 
 .form-control {
-    background-color: transparent;
+    background-color: #fcf8e3;
 }
 
 .input-id {
-    background: url("../images/SocialNetwork.png");
+    padding: 10px 0px;
     background-color: #f0f0f0;
+    position: relative;
+}
+
+    .input-id:before {
+        background: url("../images/SocialNetwork.png") no-repeat;
+        background-position: center;
+        background-size: 350px 100%;
+        opacity: 0.15;
+        position: absolute;
+        display: inline-block;
+        width: 100%;
+        height: calc(100% - 20px);
+    }
+
+.recommended-person {
+    display: inline-block;
+    padding: 10px 30px;
+}
+
+
+
+
+footer {
+    padding: 10px 0px;
+    text-align: center;
+    color: #626262;
+    background: #f0f0f0;
 }

@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     font-family: sans-serif;
 }
 
@@ -197,6 +197,14 @@ li.list-group-item .item-row {
         width: 100%;
         height: calc(100% - 20px);
     }
+
+.recommended-person {
+    display: inline-block;
+    padding: 10px 30px;
+}
+
+
+
 
 footer {
     padding: 10px 0px;
