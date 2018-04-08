@@ -2,6 +2,7 @@
     padding-top: 0px;
     padding-bottom: 0px;
     font-family: sans-serif;
+    color: #626262;
 }
 
 div {
@@ -202,6 +203,11 @@ li.list-group-item .item-row {
     display: inline-block;
     padding: 10px 30px;
 }
+
+    .recommended-person img {
+        height: 90px;
+        border-radius: 1000px;
+    }
 
 
 

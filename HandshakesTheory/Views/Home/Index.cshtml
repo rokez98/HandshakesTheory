@@ -15,10 +15,10 @@
 <form asp-controller="Home" asp-action="Search" method="post">
     <div class="input-id container" style="margin-top: 20px;">
             <div class="col-md-12">
-                <div class="row center-block" style="color: #626262; text-align:center;">
+                <div class="row center-block" style="text-align:center;">
                     <h2>Try it yourself</h2>
                 </div>
-                <div class="row center-block" style="color: #626262; text-align:center;">
+                <div class="row center-block" style="text-align:center;">
                     <img src="~/images/info.png" height="20" />
                     Enter vk IDs, between which you are looking for link
                 </div>
@@ -91,43 +91,52 @@
 <div class="text-center">
     <h2>Can't choose?</h2>
     <h3>Let us help you</h3>
+    <div class="row center-block" style="text-align:center;">
+        <img src="~/images/info.png" height="20" />
+        Just click on icon of person you want
+    </div>
     <div>
         <div class="recommended-person">
             <div>
-                <img src="~/images/Medvedev.png" class="round" height="90" />
+                <img src="~/images/Medvedev.png" class="round" />
             </div>
             <div>
                 D. Medvedev
             </div>
+            <input type="hidden" class="recommended-person-id" value="dm" />
         </div>
         <div class="recommended-person">
             <div>
-                <img src="~/images/Medvedev.png" class="round" height="90" />
+                <img src="~/images/Medvedev.png" class="round" />
             </div>
             <div>
                 D. Medvedev
             </div>
+            <input type="hidden" class="recommended-person-id" value="dm" />
         </div>
     </div>
     <div>
         <div class="recommended-person">
             <div>
-                <img src="~/images/Medvedev.png" class="round" height="90" />
+                <img src="~/images/Medvedev.png" class="round"/>
             </div>
             <div>
                 D. Medvedev
             </div>
+            <input type="hidden" class="recommended-person-id" value="dm"/>
         </div>
         <div class="recommended-person">
             <div>
-                <img src="~/images/Medvedev.png" class="round" height="90" />
+                <img src="~/images/Medvedev.png" class="round" />
             </div>
             <div>
                 D. Medvedev
             </div>
+            <input type="hidden" class="recommended-person-id" value="dm" />
         </div>
     </div>
 </div>
+
 
 <script>
     var slider = document.getElementById("myRange");
@@ -184,6 +193,15 @@
             });
     }
 
+    var recommendedPersons = document.getElementsByClassName('recommended-person');
+    for (var i = 0; i < recommendedPersons.length; i++)
+        recommendedPersons[i].addEventListener('click', function () {
+            var searchedId = document.getElementById('secondId');
+            var recommendedId = this.getElementsByClassName("recommended-person-id")[0];
+            searchedId.value = recommendedId.value;
+            validateId.call(searchedId);
+        });
+
     var submitButton = document.getElementById("submitButton");
 
     var firstIdSuccess = false;
@@ -196,5 +214,6 @@
         validateId.call(document.getElementById('firstId'));
         validateId.call(document.getElementById('secondId'));
     };
+
 
 </script>
