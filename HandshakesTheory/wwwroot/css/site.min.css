@@ -14,6 +14,7 @@ div {
 .body-content {
     padding-left: 0px !important;
     padding-right: 0px !important;
+    width: 480px;
 }
 
 /* Carousel */
@@ -189,6 +190,8 @@ li.list-group-item .item-row {
     position: relative;
 }
 
+
+
     .input-id:before {
         background: url("../images/SocialNetwork.png") no-repeat;
         background-position: center;
@@ -198,6 +201,7 @@ li.list-group-item .item-row {
         display: inline-block;
         width: 100%;
         height: calc(100% - 20px);
+        content: "";
     }
 
 .recommended-person {
