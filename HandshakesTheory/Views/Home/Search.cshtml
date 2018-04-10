@@ -1,7 +1,7 @@
 ﻿@model List<VkUser[]>
 
 @{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "Search result";
 }
 
 <div class="result-panels">
@@ -9,23 +9,28 @@
         <div class="result-panel" id="count">
             <div class="empty-row"></div>
             @if (Model.Any())
-            {
+    {
         <div>
             <h2>You are linked by @Math.Abs(Model.First().Length - 2) handshakes</h2>
             <div>
                 @for (int i = 0; i < Model.First().Length - 2; i++)
-                {
-                    <span class="glyphicon glyphicon-user count-icon"></span>
-                }
+        {
+            <span class="glyphicon glyphicon-user count-icon"></span>
+}
             </div>
         </div>
-            }
-            else
-            {
-                <div>
-                    <span> Не удалось найти связь. Попробуйте увеличить максимальную длину цепочки.</span>
-                </div>
-            }
+}
+else
+{
+        <div class="text-center too-short-chain" style="padding: 0px 10px;">
+            <h1>No links</h1>
+            <div class="text-info about-information" style="font-size: 14px;">
+                <p>
+                    No links found. Try increasing the maximal path length.
+                </p>
+            </div>
+        </div>
+}
         </div>
             <div class="result-panel active" id="write">
                 <ul class="list-group">
@@ -36,10 +41,12 @@
                             @foreach (var user in answer)
                             {
                             <div class="item-cell">
-                                <a href="@string.Format("https://vk.com/id{0}", user.Id)" title="">@user.FirstName @user.LastName</a>
-                                <div>
-                                    <img class="user-photo round" src="@string.Format("{0}", user.PhotoUrl)" />
-                                </div>
+                                <a href="@string.Format("https://vk.com/id{0}", user.Id)" title="">
+                                    <p>@user.FirstName</p><p>@user.LastName </p>
+                                    <div>
+                                        <img class="user-photo round" src="@string.Format("{0}", user.PhotoUrl)" />
+                                    </div>
+                                </a>
                             </div>
                             }
                         </div>

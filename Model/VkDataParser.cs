@@ -26,7 +26,7 @@ namespace HandshakesTheory.Models
                                             id: int.Parse((string)user["id"]),
                                             firstName: (string)user["first_name"],
                                             lastName: (string)user["last_name"],
-                                            photoUrl: (string)user["photo"])).ToList();
+                                            photoUrl: (string)user["photo_100"])).ToList();
         }
     }
 }
