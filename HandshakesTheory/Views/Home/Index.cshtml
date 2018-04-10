@@ -5,7 +5,7 @@
 }
 
 
-<div class="text-center" style="padding: 0px 10px;">
+<div class="text-center what-is-it" style="padding: 0px 10px;">
     <h1>What is it</h1>
     <div class="text-info about-information" style="font-size: 14px;">
         <p>
@@ -17,71 +17,82 @@
     </div>
 </div>
 
+<div class="text-center what-do-we-offer" style="padding: 0px 10px;">
+    <h1>What do we offer?</h1>
+    <div class="text-info about-information" style="font-size: 14px;">
+        <p>
+            We invite you to check how many people you are connected
+            to the desired person via the social network VK.
+        </p>
+    </div>
+</div>
+
+
 <form id="input-form" asp-controller="Home" asp-action="Search" method="post">
     <div class="input-id" style="margin-top: 20px;">
-            <div>
-                <div class="row center-block" style="text-align:center;">
-                    <h2>Try it yourself</h2>
-                </div>
-                <div class="row center-block help-text" style="text-align:center;">
-                    <img src="~/images/info.png" height="20" />
-                    Enter vk IDs, between which you are looking for link
-                </div>
-                <div>
-                    <div>
-                        <div id="firstIdForm" class="form-group has-feedback">
-                            <div class="input-group">
-                                <span class="input-group-addon">vk.com/</span>
-                                <input type="text" class="form-control" id="firstId" aria-describedby="firstStatus">
-                                <input class="Id" type="hidden" asp-for="FirstUser.Id"/>
-                                <input class="FirstName" type="hidden" asp-for="FirstUser.FirstName"/>
-                                <input class="LastName" type="hidden" asp-for="FirstUser.LastName"/>
-                                <input class="Photo" type="hidden" asp-for="FirstUser.PhotoUrl"/>
-                            </div>
-                            <span class="feedback feedback-user-name" aria-hidden="true"></span>
-                            <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
-                            <span class="sr-only">(success)</span>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <div id="secondIdForm" class="form-group has-feedback">
-                            <div class="input-group">
-                                <span class="input-group-addon">vk.com/</span>
-                                <input type="text" class="form-control" id="secondId" aria-describedby="secondStatus">
-                                <input class="Id" type="hidden" asp-for="SecondUser.Id"/>
-                                <input class="FirstName" type="hidden" asp-for="SecondUser.FirstName"/>
-                                <input class="LastName" type="hidden" asp-for="SecondUser.LastName"/>
-                                <input class="Photo" type="hidden" asp-for="SecondUser.PhotoUrl"/>
-                            </div>
-                            <span class="feedback feedback-user-name" aria-hidden="true"></span>
-                            <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
-                            <span class="sr-only">(success)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="help-text" style="color: #626262; text-align:center;">
-                    <img src="~/images/info.png" height="20" />
-                    Set maximal path length (affects work speed)
-                </div>
-                <div>
-                    <div>
-                        <div class="form-group has-feedback">
-                            <div class="input-group">
-                                <span class="input-group-addon">Max path</span>
-                                <label class="form-control" id="pathLength"></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                     <div class="slidecontainer">
-                            <input asp-for="MaxPathLength" type="range" min="3" max="7" value="4" class="slider" id="myRange">
-                     </div>
-                </div>
-                <input type="submit" class="btn btn-group search-btn" id="submitButton" value="Search" data-toggle="modal" data-target="#startModal">
+        <div>
+            <div class="row center-block" style="text-align:center;">
+                <h2>Try it yourself</h2>
             </div>
+            <div class="row center-block help-text" style="text-align:center;">
+                <img src="~/images/info.png" height="20" />
+                Enter vk IDs, between which you are looking for link
+            </div>
+            <div>
+                <div>
+                    <div id="firstIdForm" class="form-group has-feedback">
+                        <div class="input-group">
+                            <span class="input-group-addon">vk.com/</span>
+                            <input type="text" class="form-control" id="firstId" aria-describedby="firstStatus">
+                            <input class="Id" type="hidden" asp-for="FirstUser.Id" />
+                            <input class="FirstName" type="hidden" asp-for="FirstUser.FirstName" />
+                            <input class="LastName" type="hidden" asp-for="FirstUser.LastName" />
+                            <input class="Photo" type="hidden" asp-for="FirstUser.PhotoUrl" />
+                        </div>
+                        <span class="feedback feedback-user-name" aria-hidden="true"></span>
+                        <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
+                        <span class="sr-only">(success)</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div id="secondIdForm" class="form-group has-feedback">
+                        <div class="input-group">
+                            <span class="input-group-addon">vk.com/</span>
+                            <input type="text" class="form-control" id="secondId" aria-describedby="secondStatus">
+                            <input class="Id" type="hidden" asp-for="SecondUser.Id" />
+                            <input class="FirstName" type="hidden" asp-for="SecondUser.FirstName" />
+                            <input class="LastName" type="hidden" asp-for="SecondUser.LastName" />
+                            <input class="Photo" type="hidden" asp-for="SecondUser.PhotoUrl" />
+                        </div>
+                        <span class="feedback feedback-user-name" aria-hidden="true"></span>
+                        <span class="feedback feedback-icon glyphicon" aria-hidden="true"></span>
+                        <span class="sr-only">(success)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="help-text" style="color: #626262; text-align:center;">
+                <img src="~/images/info.png" height="20" />
+                Set maximal path length (affects work speed)
+            </div>
+            <div>
+                <div>
+                    <div class="form-group has-feedback">
+                        <div class="input-group">
+                            <span class="input-group-addon">Max path</span>
+                            <label class="form-control" id="pathLength"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="slidecontainer">
+                    <input asp-for="MaxPathLength" type="range" min="3" max="7" value="4" class="slider" id="myRange">
+                </div>
+            </div>
+            <input type="submit" class="btn btn-group search-btn" id="submitButton" value="Search" data-toggle="modal" data-target="#startModal">
+        </div>
     </div>
 </form>
 
@@ -92,118 +103,118 @@
         <img src="~/images/info.png" height="20" />
         Just click on icon of person you want
     </div>
-        <div class="recommended-person">
-            <div>
-                <a href="#input-form">
-                    <img src="~/images/Medvedev.png" class="round" />
-                </a>
-            </div>
-            <div>
-                D. Medvedev
-            </div>
-            <div>
-                Politic
-            </div>
-            <input type="hidden" class="recommended-person-id" value="dm" />
+    <div class="recommended-person">
+        <div>
+            <a href="#input-form">
+                <img src="~/images/Medvedev.png" class="round" />
+            </a>
         </div>
-        <div class="recommended-person">
-            <div>
-                <a href="#input-form">
-                    <img src="~/images/Oxxxymiron.png" class="round" />
-                </a>
-            </div>
-            <div>
-                Oxxxymiron
-            </div>
-            <div>
-                Artist
-            </div>
-            <input type="hidden" class="recommended-person-id" value="norimyxxxo" />
+        <div>
+            D. Medvedev
         </div>
-        <div class="recommended-person">
-            <div>
-                <a href="#input-form">
-                    <img src="~/images/Slivkishow.png" class="round" />
-                </a>
-            </div>
-            <div>
-                Slivkishow
-            </div>
-            <div>
-                Blogger
-            </div>
-            <input type="hidden" class="recommended-person-id" value="id206285614" />
+        <div>
+            Politic
         </div>
-        <div class="recommended-person">
-            <div>
-                <a href="#input-form">
-                    <img src="~/images/Leekei.png" class="round" />
-                </a>
-            </div>
-            <div>
-                Leekei
-            </div>
-            <div>
-                Blogger
-            </div>
-            <input type="hidden" class="recommended-person-id" value="id151409134" />
+        <input type="hidden" class="recommended-person-id" value="dm" />
+    </div>
+    <div class="recommended-person">
+        <div>
+            <a href="#input-form">
+                <img src="~/images/Oxxxymiron.png" class="round" />
+            </a>
         </div>
-        <div class="recommended-person">
-            <div>
-                <a href="#input-form">
-                    <img src="~/images/Navalny.png" class="round" />
-                </a>
-            </div>
-            <div>
-                A. Navalny
-            </div>
-            <div>
-                Blogger
-            </div>
-            <input type="hidden" class="recommended-person-id" value="navalny" />
+        <div>
+            Oxxxymiron
         </div>
-        <div class="recommended-person">
-            <div>
-                <a href="#input-form">
-                    <img src="~/images/KateClap.png" class="round" />
-                </a>
-            </div>
-            <div>
-                Kate Clap
-            </div>
-            <div>
-                Blogger
-            </div>
-            <input type="hidden" class="recommended-person-id" value="kate_clapp" />
+        <div>
+            Artist
         </div>
-        <div class="recommended-person">
-            <div>
-                <a href="#input-form">
-                    <img src="~/images/NoizeMC.png" class="round" />
-                </a>
-            </div>
-            <div>
-                Noize MC
-            </div>
-            <div>
-                Artist
-            </div>
-            <input type="hidden" class="recommended-person-id" value="noize_mc" />
+        <input type="hidden" class="recommended-person-id" value="norimyxxxo" />
+    </div>
+    <div class="recommended-person">
+        <div>
+            <a href="#input-form">
+                <img src="~/images/Slivkishow.png" class="round" />
+            </a>
         </div>
-        <div class="recommended-person">
-            <div>
-                <a href="#input-form">
-                    <img src="~/images/Kischuk.png" class="round" />
-                </a>
-            </div>
-            <div>
-                Katya Kischuk
-            </div>
-            <div>
-                Artists
-            </div>
-            <input type="hidden" class="recommended-person-id" value="id67562946" />
+        <div>
+            Slivkishow
         </div>
+        <div>
+            Blogger
+        </div>
+        <input type="hidden" class="recommended-person-id" value="id206285614" />
+    </div>
+    <div class="recommended-person">
+        <div>
+            <a href="#input-form">
+                <img src="~/images/Leekei.png" class="round" />
+            </a>
+        </div>
+        <div>
+            Leekei
+        </div>
+        <div>
+            Blogger
+        </div>
+        <input type="hidden" class="recommended-person-id" value="id151409134" />
+    </div>
+    <div class="recommended-person">
+        <div>
+            <a href="#input-form">
+                <img src="~/images/Navalny.png" class="round" />
+            </a>
+        </div>
+        <div>
+            A. Navalny
+        </div>
+        <div>
+            Blogger
+        </div>
+        <input type="hidden" class="recommended-person-id" value="navalny" />
+    </div>
+    <div class="recommended-person">
+        <div>
+            <a href="#input-form">
+                <img src="~/images/KateClap.png" class="round" />
+            </a>
+        </div>
+        <div>
+            Kate Clap
+        </div>
+        <div>
+            Blogger
+        </div>
+        <input type="hidden" class="recommended-person-id" value="kate_clapp" />
+    </div>
+    <div class="recommended-person">
+        <div>
+            <a href="#input-form">
+                <img src="~/images/NoizeMC.png" class="round" />
+            </a>
+        </div>
+        <div>
+            Noize MC
+        </div>
+        <div>
+            Artist
+        </div>
+        <input type="hidden" class="recommended-person-id" value="noize_mc" />
+    </div>
+    <div class="recommended-person">
+        <div>
+            <a href="#input-form">
+                <img src="~/images/Kischuk.png" class="round" />
+            </a>
+        </div>
+        <div>
+            Katya Kischuk
+        </div>
+        <div>
+            Artists
+        </div>
+        <input type="hidden" class="recommended-person-id" value="id67562946" />
+    </div>
 </div>
 
 
@@ -289,7 +300,7 @@
 <script>
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (event) {
-            if ( location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
                 var target = $(this.hash);
                 target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
                 if (target.length) {
