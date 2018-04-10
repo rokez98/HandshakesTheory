@@ -214,6 +214,7 @@ li.list-group-item .item-row {
     .recommended-person img {
         height: 125px;
         border-radius: 1000px;
+        box-shadow: 0px 0px 30px -5px #000000;
     }
 
 .round {
@@ -275,4 +276,11 @@ li .arrow {
 .about-information {
     color: #626262;
     padding: 0px 50px;
+}
+
+.search-btn {
+    width: 100%;
+    margin-top: 5px;
+    height: 40px;
+    text-align: center;
 }
