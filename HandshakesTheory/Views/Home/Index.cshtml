@@ -12,13 +12,13 @@
     </div>
 </div>
 
-<form asp-controller="Home" asp-action="Search" method="post">
+<form id="input-form" asp-controller="Home" asp-action="Search" method="post">
     <div class="input-id" style="margin-top: 20px;">
             <div>
                 <div class="row center-block" style="text-align:center;">
                     <h2>Try it yourself</h2>
                 </div>
-                <div class="row center-block" style="text-align:center;">
+                <div class="row center-block help-text" style="text-align:center;">
                     <img src="~/images/info.png" height="20" />
                     Enter vk IDs, between which you are looking for link
                 </div>
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="color: #626262; text-align:center;">
+                <div class="help-text" style="color: #626262; text-align:center;">
                     <img src="~/images/info.png" height="20" />
                     Set maximal path length (affects work speed)
                 </div>
@@ -91,87 +91,103 @@
 <div class="text-center">
     <h2>Can't choose?</h2>
     <h3>Let us help you</h3>
-    <div class="row center-block" style="text-align:center;">
+    <div class="row center-block help-text" style="text-align:center;" >
         <img src="~/images/info.png" height="20" />
         Just click on icon of person you want
     </div>
     <div>
+         <div class="recommended-person">
+             <div>
+                 <a href="#input-form">
+                     <img src="~/images/Korzh.png" class="round" />
+                 </a>
+             </div>
+                <div>
+                    Max Korzh
+                </div>
+                <div>
+                    Artist
+                </div>
+                <input type="hidden" class="recommended-person-id" value="maxkorzh_official" />
+            </div>
+
+            <div class="recommended-person">
+                <div>
+                    <a href="#input-form">
+                        <img src="~/images/Medvedev.png" class="round" />
+                    </a>
+                </div>
+                <div>
+                    D. Medvedev
+                </div>
+                <div>
+                    Politic
+                </div>
+                <input type="hidden" class="recommended-person-id" value="dm" />
+            </div>
+        </a>
+</div>
+    <div>
+            <div class="recommended-person">
+                <div>
+                    <a href="#input-form">
+                        <img src="~/images/Oxxxymiron.png" class="round" />
+                    </a>
+                </div>
+                <div>
+                    Oxxxymiron
+                </div>
+                <div>
+                    Artist
+                </div>
+                <input type="hidden" class="recommended-person-id" value="norimyxxxo" />
+            </div>
+        </a>
         <div class="recommended-person">
-            <div>
-                <img src="~/images/Korzh.png" class="round" />
+                <div>
+                    <a href="#input-form">
+                        <img src="~/images/Wylsacom.png" class="round" />
+                    </a>
+                </div>
+                <div>
+                    Wylsacom
+                </div>
+                <div>
+                    IT-Blogger
+                </div>
+                <input type="hidden" class="recommended-person-id" value="wylsa" />
             </div>
-            <div>
-                Max Korzh
-            </div>
-            <div>
-                Artist
-            </div>
-            <input type="hidden" class="recommended-person-id" value="maxkorzh_official" />
-        </div>
-        <div class="recommended-person">
-            <div>
-                <img src="~/images/Medvedev.png" class="round" />
-            </div>
-            <div>
-                D. Medvedev
-            </div>
-            <div>
-                Politic
-            </div>
-            <input type="hidden" class="recommended-person-id" value="dm" />
-        </div>
     </div>
     <div>
-        <div class="recommended-person">
-            <div>
-                <img src="~/images/Oxxxymiron.png" class="round" />
+            <div class="recommended-person">
+                <div>
+                    <a href="#input-form">
+                        <img src="~/images/Slivkishow.png" class="round" />
+                    </a>
+                </div>
+                <div>
+                    Slivkishow
+                </div>
+                <div>
+                    Blogger
+                </div>
+                <input type="hidden" class="recommended-person-id" value="id206285614" />
             </div>
-            <div>
-                Oxxxymiron
+            <div class="recommended-person">
+                <div>
+                    <a href="#input-form">
+                        <img src="~/images/Leekei.png" class="round" />
+                    </a>
+                </div>
+                <div>
+                    Leekei
+                </div>
+                <div>
+                    Blogger
+                </div>
+                <input type="hidden" class="recommended-person-id" value="id151409134" />
             </div>
-            <div>
-                Artist
-            </div>
-            <input type="hidden" class="recommended-person-id" value="norimyxxxo" />
-        </div>
-        <div class="recommended-person">
-            <div>
-                <img src="~/images/Wylsacom.png" class="round" />
-            </div>
-            <div>
-                Wylsacom
-            </div>
-            <div>
-                IT-Blogger
-            </div>
-            <input type="hidden" class="recommended-person-id" value="wylsa" />
-        </div>
-    </div>
-    <div>
-        <div class="recommended-person">
-            <div>
-                <img src="~/images/Slivkishow.png" class="round" />
-            </div>
-            <div>
-                Slivkishow
-            </div>
-            <div>
-                Blogger
-            </div>
-            <input type="hidden" class="recommended-person-id" value="id206285614" />
-        </div>
-        <div class="recommended-person">
-            <div>
-                <img src="~/images/Leekei.png" class="round" />
-            </div>
-            <div>
-                Leekei
-            </div>
-            <div>
-                Blogger
-            </div>
-            <input type="hidden" class="recommended-person-id" value="id151409134" />
-        </div>
+        </a>
     </div>
 </div>
 
@@ -254,4 +270,23 @@
     };
 
 
+</script>
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (event) {
+            if ( location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    event.preventDefault();
+
+                    var scrollTop = target.offset().top - $('.sticky-top').height();
+
+                    $('html, body').animate({
+                        scrollTop: scrollTop
+                    }, 1000)
+                }
+            }
+        });
+    });
 </script>

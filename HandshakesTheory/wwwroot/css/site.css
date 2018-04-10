@@ -14,7 +14,8 @@ div {
 .body-content {
     padding-left: 0px !important;
     padding-right: 0px !important;
-    width: 480px;
+    width: 440px;
+    box-shadow: 0px 0px 35px -10px #000000;
 }
 
 /* Carousel */
@@ -105,7 +106,7 @@ li.list-group-item .item-row {
     top: 0;
     height: 34px;
     line-height: 34px;
-    z-index: 4;
+    z-index: 5;
 }
 
 .feedback-user-name {
@@ -144,15 +145,6 @@ li.list-group-item .item-row {
     width: 34px;
 }
 
-.feedback {
-    position: absolute;
-    text-align: center;
-    top: 0;
-    height: 34px;
-    line-height: 34px;
-    z-index: 2;
-}
-
 .glyphicon {
     position: absolute;
     top: 10px;
@@ -185,14 +177,17 @@ li.list-group-item .item-row {
 }
 
 .input-id {
-    padding: 10px 0px;
+    padding: 10px 20px;
     background-color: #f0f0f0;
     position: relative;
+    box-shadow: 0px 0px 25px -5px #000000;
 }
 
 
 
     .input-id:before {
+        top: 10px;
+        left: 0px;
         background: url("../images/SocialNetwork.png") no-repeat;
         background-position: center;
         background-size: 350px 100%;
@@ -210,7 +205,7 @@ li.list-group-item .item-row {
 }
 
     .recommended-person img {
-        height: 90px;
+        height: 125px;
         border-radius: 1000px;
     }
 
@@ -263,4 +258,9 @@ li .arrow {
     position: absolute;
     bottom: 0px;
     right: 5px;
+}
+
+.help-text {
+    font-size: 0.85em;
+    opacity: 0.75;
 }
