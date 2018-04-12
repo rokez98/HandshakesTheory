@@ -13,6 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{62
 		Graphics\Site.Index.psd = Graphics\Site.Index.psd
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Readme", "Readme", "{04B2EA86-459A-4DEE-84D2-2BD67A0E414B}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\Vadim\Pictures\CantChoose.png = C:\Users\Vadim\Pictures\CantChoose.png
+		C:\Users\Vadim\Pictures\NoLinks.png = C:\Users\Vadim\Pictures\NoLinks.png
+		C:\Users\Vadim\Pictures\RequestForm.png = C:\Users\Vadim\Pictures\RequestForm.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
