@@ -18,6 +18,4 @@ IIS Express 10.0
 Веб-приложение доступно по адресу: http://handshakes.canadacentral.cloudapp.azure.com
 
 ## Как пользоваться
-![alt text](https://ibb.co/dAotCS)
-
-[url=https://ibb.co/dAotCS][img]https://preview.ibb.co/mcLjK7/Cant_Choose.png[/img][/url]
+![alt text](https://raw.githubusercontent.com/rokez98/HandshakesTheory/Graphics/NoLinks.png)
