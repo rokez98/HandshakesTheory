@@ -19,3 +19,5 @@ IIS Express 10.0
 
 ## Как пользоваться
 ![alt text](https://ibb.co/dAotCS)
+
+[url=https://ibb.co/dAotCS][img]https://preview.ibb.co/mcLjK7/Cant_Choose.png[/img][/url]
