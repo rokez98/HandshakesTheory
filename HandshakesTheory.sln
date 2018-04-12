@@ -9,15 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandshakesTheory.Model", "M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{62698438-9D6E-414F-A3B5-246AB61F73E0}"
 	ProjectSection(SolutionItems) = preProject
-		Graphics\Site.Index.png = Graphics\Site.Index.png
-		Graphics\Site.Index.psd = Graphics\Site.Index.psd
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Readme", "Readme", "{04B2EA86-459A-4DEE-84D2-2BD67A0E414B}"
-	ProjectSection(SolutionItems) = preProject
 		C:\Users\Vadim\Pictures\CantChoose.png = C:\Users\Vadim\Pictures\CantChoose.png
 		C:\Users\Vadim\Pictures\NoLinks.png = C:\Users\Vadim\Pictures\NoLinks.png
 		C:\Users\Vadim\Pictures\RequestForm.png = C:\Users\Vadim\Pictures\RequestForm.png
+		Graphics\Site.Index.png = Graphics\Site.Index.png
+		Graphics\Site.Index.psd = Graphics\Site.Index.psd
 	EndProjectSection
 EndProject
 Global
