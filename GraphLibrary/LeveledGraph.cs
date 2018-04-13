@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HandshakesTheory.Models
+namespace GraphLibrary.Models
 {
     public class LeveledGraph<TKey, TData> : AbstractGraph<TKey, TData>
     {

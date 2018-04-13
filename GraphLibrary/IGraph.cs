@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HandshakesTheory.Models
+namespace GraphLibrary.Models
 {
     public interface IGraph<TKey, TData> 
     {

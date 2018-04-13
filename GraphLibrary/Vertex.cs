@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HandshakesTheory.Models
+namespace GraphLibrary.Models
 {
     public class Vertex<TKey, TData> : IVertex<TKey, TData>
     {

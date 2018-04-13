@@ -1,4 +1,4 @@
-﻿namespace HandshakesTheory.Models
+﻿namespace GraphLibrary.Models
 {
     public class DepthVertex<TKey, TData> : Vertex<TKey, TData>
     {

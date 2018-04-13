@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using HandshakesTheory.Models;
 using Microsoft.Ajax.Utilities;
 
+
 namespace HandshakesTheory.Controllers
 {
     public class HomeController : Controller

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace HandshakesTheory.Models
 {
-    public interface IVertex<TKey, TData>
+    public interface IVkDataParser
     {
-        TData Data { get; set; }
-        ISet<TKey> Edges { get; set; }
+        IEnumerable<VkUser> parseUsers(string response);
     }
 }

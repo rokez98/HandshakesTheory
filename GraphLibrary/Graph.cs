@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HandshakesTheory.Models
+namespace GraphLibrary.Models
 {
     public abstract class AbstractGraph<TKey, TData> : IGraph<TKey, TData>
     {
