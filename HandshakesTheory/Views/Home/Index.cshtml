@@ -228,7 +228,7 @@
 </script>
 <script>
     function makeRequestUrl(id) {
-        return 'https://api.vk.com/method/users.get?v=fuckvk&uids=' + id + '&fields=bdate,photo,education&callback=?';
+        return 'https://api.vk.com/method/users.get?v=fuckvk&uids=' + id + '&fields=bdate,photo_100,education&callback=?';
     }
 
     function validateId() {
@@ -259,7 +259,7 @@
                     Id.value = users[0].uid;
                     FirstName.value = users[0].first_name;
                     LastName.value = users[0].last_name;
-                    Photo.value = users[0].photo;
+                    Photo.value = users[0].photo_100;
 
                     Form.classList.add("has-success");
                     Form.classList.remove("has-error");

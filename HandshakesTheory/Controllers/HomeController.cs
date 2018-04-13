@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HandshakesTheory.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace HandshakesTheory.Controllers
 {
@@ -28,20 +29,6 @@ namespace HandshakesTheory.Controllers
             {
                 return View("Error", ex.Message);
             }
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
         }
     }
 }

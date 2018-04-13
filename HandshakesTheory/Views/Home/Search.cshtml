@@ -1,4 +1,4 @@
-﻿@model List<VkUser[]>
+﻿@model IEnumerable<VkUser[]>
 
 @{
     ViewData["Title"] = "Search result";
@@ -10,13 +10,12 @@
             <div class="empty-row"></div>
             @if (Model.Any())
     {
-        <div>
-            <h2>You are linked by @Math.Abs(Model.First().Length - 2) handshakes</h2>
-            <div>
-                @for (int i = 0; i < Model.First().Length - 2; i++)
-        {
-            <span class="glyphicon glyphicon-user count-icon"></span>
-}
+        <div class="text-center success-search" style="padding: 0px 10px;">
+            <h1>Success!</h1>
+            <div class="text-info about-information" style="font-size: 14px;">
+                <p>
+                    You are linked by @Math.Abs(Model.First().Length - 2) handshakes
+                </p>
             </div>
         </div>
 }

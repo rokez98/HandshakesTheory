@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace HandshakesTheory.Models
 {
+    public enum TreeType
+    {
+        Normal,
+        Reversed
+    }
+
     public class Vk
     {
         public static IVkDataLoader dataLoader = new VkDataLoader();
@@ -13,9 +19,9 @@ namespace HandshakesTheory.Models
 
         private static string makeFriendsRequestUrl(int id) => "https://api.vk.com/method/friends.get?v=5.73&fields=photo_100&user_id=" + id;
 
-        private static Graph<VkUser> BuildUsersSocialGraph(VkUser user, TreeType treeType)
+        private static LeveledGraph<int, VkUser> BuildUsersSocialGraph(VkUser user, TreeType treeType)
         {
-            Graph<VkUser> graph = new Graph<VkUser>();
+            LeveledGraph<int, VkUser> graph = new LeveledGraph<int, VkUser>();
 
             SortedSet<int> toDownloadList = new SortedSet<int>();
             toDownloadList.Add(user.Id);
@@ -33,10 +39,8 @@ namespace HandshakesTheory.Models
                 {
                     graph.AddNode(friend.Id, friend, treeType == TreeType.Normal ? 1 : 100 - 1);
 
-                    if (treeType == TreeType.Normal)
-                        graph.AddLink(friendsList.Key, friend.Id);
-                    else
-                        graph.AddLink(friend.Id, friendsList.Key);
+                    if (treeType == TreeType.Normal) graph.AddLink(friendsList.Key, friend.Id);
+                    else graph.AddLink(friend.Id, friendsList.Key);
 
                     toDownloadList.Add(friend.Id);
                 }
@@ -46,7 +50,7 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        private static Graph<VkUser> IncreaseDepthOfUsersSocialGraph(Graph<VkUser> graph, TreeType treeType)
+        private static LeveledGraph<int, VkUser> IncreaseDepthOfUsersSocialGraph(LeveledGraph<int, VkUser> graph, TreeType treeType)
         {
             var toDownloadList = Vk.getUsersIdsOfLevel(graph, treeType == TreeType.Normal ? graph.Depth : 100 - graph.Depth);
 
@@ -73,7 +77,7 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        public static Graph<VkUser> BuildSocialGraph(VkUser firstUser, VkUser secondUser, int maximalDepth)
+        public static LeveledGraph<int, VkUser> BuildSocialGraph(VkUser firstUser, VkUser secondUser, int maximalDepth)
         {
             var normalGraph = Vk.BuildUsersSocialGraph(firstUser, TreeType.Normal);
             var reversedGraph = Vk.BuildUsersSocialGraph(secondUser, TreeType.Reversed);
@@ -85,11 +89,11 @@ namespace HandshakesTheory.Models
                 else reversedGraph = Vk.IncreaseDepthOfUsersSocialGraph(reversedGraph, TreeType.Reversed);
             }
 
-            return Graph<VkUser>.Merge(normalGraph, reversedGraph);
+            return LeveledGraph<int, VkUser>.Merge(normalGraph, reversedGraph);
         }
 
 
-        public static IEnumerable<int> getUsersIdsOfLevel(Graph<VkUser> graph, int level) => graph.getNodesOfLevel(level).Select(node => node.Id);
+        public static IEnumerable<int> getUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.getNodesOfLevel(level).Select(node => node.Id);
 
         public static async Task<string> DownloadUserInfo(int id) => await dataLoader.DownloadDataAsync(makeFriendsRequestUrl(id));
 
