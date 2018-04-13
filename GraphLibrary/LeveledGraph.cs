@@ -13,7 +13,7 @@ namespace GraphLibrary.Models
 
         public override void AddLink(TKey from, TKey to)
         {
-            if (Graph.ContainsKey(from) && (Graph[from] as DepthVertex<TKey, TData>).Depth < (Graph[to] as DepthVertex<TKey, TData>).Depth) Graph[from].Edges.Add(to);
+            if (Graph.ContainsKey(from) && Graph.ContainsKey(to) && (Graph[from] as DepthVertex<TKey, TData>).Depth < (Graph[to] as DepthVertex<TKey, TData>).Depth) Graph[from].Edges.Add(to);
         }
 
         public override void AddNode(TKey key, TData data, int depth = 0)

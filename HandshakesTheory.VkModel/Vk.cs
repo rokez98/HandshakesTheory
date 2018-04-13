@@ -78,30 +78,34 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        public static LeveledGraph<int, VkUser> BuildSocialGraph(VkUser firstUser, VkUser secondUser, int maximalDepth)
+        public static List<VkUser[]> SearchPathesBetweenUsers(VkUser firstUser, VkUser secondUser, int maximalDepth)
         {
             var normalGraph = Vk.BuildUsersSocialGraph(firstUser, TreeType.Normal);
             var reversedGraph = Vk.BuildUsersSocialGraph(secondUser, TreeType.Reversed);
 
+            var allPathes = new List<VkUser[]>();
+
             int currentDepth = 3;
-            while (currentDepth++ < maximalDepth)
+            while (!(allPathes = LeveledGraph<int,VkUser>.Merge(normalGraph, reversedGraph).searchAllPathes(firstUser.Id, secondUser.Id)).Any() && currentDepth++ < maximalDepth)
             {
                 if (normalGraph.Size < reversedGraph.Size) normalGraph = Vk.IncreaseDepthOfUsersSocialGraph(normalGraph, TreeType.Normal);
                 else reversedGraph = Vk.IncreaseDepthOfUsersSocialGraph(reversedGraph, TreeType.Reversed);
             }
 
-            return LeveledGraph<int, VkUser>.Merge(normalGraph, reversedGraph);
+            return allPathes;
         }
 
 
-        public static IEnumerable<int> getUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.getNodesOfLevel(level).Select(node => node.Id);
+        static IEnumerable<int> getUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.getNodesOfLevel(level).Select(node => node.Id);
 
         public static async Task<string> DownloadUserInfo(int id) => await dataLoader.DownloadDataAsync(makeFriendsRequestUrl(id));
 
         public static Dictionary<int, IEnumerable<VkUser>> DownloadFriendsIds(IEnumerable<int> userIds)
         {
+#if DEBUG
             Stopwatch watch = new Stopwatch();
             watch.Start();
+#endif
 
             Dictionary<int, IEnumerable<VkUser>> response = new Dictionary<int, IEnumerable<VkUser>>();
 
@@ -112,14 +116,14 @@ namespace HandshakesTheory.Models
 
             watch.Stop();
 
-
+#if DEBUG
             int numberOfRequests = userIds.Distinct().Count();
             Console.WriteLine($"Time: {(double)watch.ElapsedMilliseconds / 1000} sec;");
             Console.WriteLine($"Total requests: {numberOfRequests};");
             Console.WriteLine($"Avg request time: {(double)watch.ElapsedMilliseconds / (1000 * numberOfRequests)} sec per request;");
             Console.WriteLine($"{((float)1 / 3) / ((double)watch.ElapsedMilliseconds / (1000 * numberOfRequests)) } times faster than Vk Api requests!");
             Console.WriteLine($"-----------------------------------------------------");
-
+#endif
             return response;
         }
     }

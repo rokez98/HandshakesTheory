@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GraphLibrary\GraphLibrary.csproj" />
     <ProjectReference Include="..\HandshakesTheory.VkModel\HandshakesTheory.VkModel.csproj" />
   </ItemGroup>
 

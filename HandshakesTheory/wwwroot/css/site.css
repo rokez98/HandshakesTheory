@@ -1,16 +1,8 @@
 ﻿body {
-    padding-top: 0px;
-    padding-bottom: 0px;
     font-family: sans-serif;
     color: #626262;
 }
 
-div {
-    display: block;
-}
-
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 0px !important;
     padding-right: 0px !important;
@@ -21,30 +13,6 @@ div {
 @media only screen and (max-width: 600px) {
     .body-content {
         width: 440px;
-    }
-}
-
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
-}
-
-/* QR code generator */
-#qrCode {
-    margin: 15px;
-}
-
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
     }
 }
 
@@ -121,12 +89,6 @@ li.list-group-item .item-row {
     pointer-events: none;
 }
 
-.has-feedback.has-success span.feedback-user-name {
-    animation-name: blink;
-    animation-duration: 3s;
-    animation-timing-function: linear;
-}
-
 .has-feedback.has-success span {
     color: #3c763d;
 }
@@ -158,8 +120,6 @@ li.list-group-item .item-row {
     font-family: 'Glyphicons Halflings';
     font-weight: 400;
     line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .glyphicon-ok:before {
@@ -189,8 +149,6 @@ li.list-group-item .item-row {
     position: relative;
     box-shadow: 0px 0px 25px -5px #000000;
 }
-
-
 
     .input-id:before {
         top: 10px;
@@ -343,65 +301,27 @@ li .arrow {
 }
 
 .too-short-chain {
-    color: white;
-    margin: 0px 10px;
     background: #c6a814;
-    box-shadow: 0px 0px 30px -5px #000000;
-    position: relative;
-    min-height: 120px;
 }
 
-    .too-short-chain h1 {
-        padding-top: 20px;
-    }
-
-    .too-short-chain p {
-        padding-bottom: 20px;
-        color: white;
-    }
-
     .too-short-chain:before {
-        left: 0px;
         background: url("../images/ReachingHands.png") no-repeat;
         background-position: center;
         background-size: 100%;
-        opacity: 0.1;
-        position: absolute;
-        display: inline-block;
         width: 100%;
         height: 100%;
-        content: "";
     }
 
 .exception {
-    color: white;
-    margin: 0px 10px;
     background: #e12525;
-    box-shadow: 0px 0px 30px -5px #000000;
-    position: relative;
-    min-height: 120px;
 }
 
-    .exception h1 {
-        padding-top: 20px;
-    }
-
-    .exception p {
-        padding-bottom: 20px;
-        color: white;
-    }
-
     .exception:before {
-        left: 0px;
         background: url("../images/Error.png") no-repeat;
         background-position: center;
         background-size: 30%;
-        opacity: 0.1;
-        position: absolute;
-        display: inline-block;
         width: 100%;
         height: 100%;
-        content: "";
     }
 
 .header-theory {
@@ -427,32 +347,39 @@ li .arrow {
     }
 
 .success-search {
+    background: #528e74;
+}
+
+    .success-search:before {
+        background: url("../images/PeopleChain.png") no-repeat;
+        background-position: center;
+        background-size: 100%;
+        width: 100%;
+        height: 100%;
+    }
+
+.notification-banner {
     color: white;
     margin: 0px 10px;
-    background: #528e74;
     box-shadow: 0px 0px 30px -5px #000000;
     position: relative;
     min-height: 120px;
 }
 
-    .success-search h1 {
+    .notification-banner h1 {
         padding-top: 20px;
     }
 
-    .success-search p {
+    .notification-banner p {
         padding-bottom: 20px;
         color: white;
     }
 
-    .success-search:before {
+    .notification-banner:before {
+        top: 0px;
         left: 0px;
-        background: url("../images/PeopleChain.png") no-repeat;
-        background-position: center;
-        background-size: 100%;
         opacity: 0.1;
         position: absolute;
         display: inline-block;
-        width: 100%;
-        height: 100%;
         content: "";
     }

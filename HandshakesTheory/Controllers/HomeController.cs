@@ -12,19 +12,15 @@ namespace HandshakesTheory.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
 
         [HttpPost]
         public IActionResult Search(SearchModel searchModel)
         {
             try
             {
-                var graph = Vk.BuildSocialGraph(searchModel.FirstUser, searchModel.SecondUser, searchModel.MaxPathLength);
-                var answers = graph.searchAllPathes(searchModel.FirstUser.Id, searchModel.SecondUser.Id);
-                return View(answers);
+                var pathesList = Vk.SearchPathesBetweenUsers(searchModel.FirstUser, searchModel.SecondUser, searchModel.MaxPathLength);
+                return View(pathesList.DistinctBy(list => list[1].Id));
             }
             catch (Exception ex)
             {
