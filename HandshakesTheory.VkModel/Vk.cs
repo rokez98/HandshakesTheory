@@ -7,18 +7,18 @@ using GraphLibrary.Models;
 
 namespace HandshakesTheory.Models
 {
-    public enum TreeType
-    {
-        Normal,
-        Reversed
-    }
-
     public class Vk
     {
+        enum TreeType
+        {
+            Normal,
+            Reversed
+        }
+
         public static IVkDataLoader dataLoader = new VkDataLoader();
         public static IVkDataParser dataParser = new VkDataParser();
 
-        private static string makeFriendsRequestUrl(int id) => "https://api.vk.com/method/friends.get?v=5.73&fields=photo_100&user_id=" + id;
+        private static string MakeFriendsRequestUrl(int id) => "https://api.vk.com/method/friends.get?v=5.73&fields=photo_100&user_id=" + id;
 
         private static LeveledGraph<int, VkUser> BuildUsersSocialGraph(VkUser user, TreeType treeType)
         {
@@ -101,7 +101,7 @@ namespace HandshakesTheory.Models
 
         static IEnumerable<int> GetUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.GetNodesOfLevel(level).Select(node => node.Id);
 
-        public static async Task<string> DownloadUserInfo(int id) => await dataLoader.DownloadDataAsync(makeFriendsRequestUrl(id));
+        public static async Task<string> DownloadUserInfo(int id) => await dataLoader.DownloadDataAsync(MakeFriendsRequestUrl(id));
 
         public static Dictionary<int, IEnumerable<VkUser>> DownloadFriendsIds(IEnumerable<int> userIds)
         {

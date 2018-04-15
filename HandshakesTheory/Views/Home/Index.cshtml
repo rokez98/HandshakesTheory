@@ -27,7 +27,7 @@
 </div>
 
 
-<form id="input-form" asp-controller="Home" asp-action="Search" method="post">
+<form id="input-form" asp-controller="Home" asp-action="Index" method="post">
     <div class="input-id" style="margin-top: 20px;">
         <div>
             <div class="row center-block" style="text-align:center;">
@@ -43,7 +43,7 @@
                         <div class="input-group">
                             <span class="input-group-addon">vk.com/</span>
                             <input type="text" class="form-control" id="firstId" aria-describedby="firstStatus">
-                            <input class="Id" type="hidden" asp-for="FirstUser.Id" />
+                            <input class="Id" type="hidden" asp-for="FirstUser.Id"/>
                             <input class="FirstName" type="hidden" asp-for="FirstUser.FirstName" />
                             <input class="LastName" type="hidden" asp-for="FirstUser.LastName" />
                             <input class="Photo" type="hidden" asp-for="FirstUser.PhotoUrl" />
@@ -226,9 +226,22 @@
         output.innerHTML = this.value;
     }
 </script>
+
 <script>
     function makeRequestUrl(id) {
         return 'https://api.vk.com/method/users.get?v=fuckvk&uids=' + id + '&fields=bdate,photo_100,education&callback=?';
+    }
+
+    function validateInput() {
+        var firstId = document.getElementById('firstId');
+        var firstIdForm = firstId.parentElement.parentElement;
+        var secondId = document.getElementById('secondId');
+        var secondIdForm = secondId.parentElement.parentElement;
+
+
+        var button = document.getElementById('submitButton');
+        button.disabled = (firstIdForm.classList.contains("has-success") && secondIdForm.classList.contains("has-success")
+            && firstId.value != secondId.value) ? false : true;
     }
 
     function validateId() {
@@ -269,6 +282,8 @@
 
                     FeedbackUsername.innerHTML = users[0].first_name + ' ' + users[0].last_name;
                 }
+
+                validateInput();
             });
     }
 
@@ -293,9 +308,8 @@
         validateId.call(document.getElementById('firstId'));
         validateId.call(document.getElementById('secondId'));
     };
-
-
 </script>
+
 <script>
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (event) {
