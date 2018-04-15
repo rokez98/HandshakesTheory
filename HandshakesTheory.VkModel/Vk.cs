@@ -34,14 +34,14 @@ namespace HandshakesTheory.Models
                 var friendId = friendsList.Key;
                 var friendsOfFriendIds = friendsList.Value;
 
-                graph.AddNode(user.Id, user, treeType == TreeType.Normal ? 0 : 100);
+                graph.AddVertex(user.Id, user, treeType == TreeType.Normal ? 0 : 100);
 
                 foreach (var friend in friendsOfFriendIds)
                 {
-                    graph.AddNode(friend.Id, friend, treeType == TreeType.Normal ? 1 : 100 - 1);
+                    graph.AddVertex(friend.Id, friend, treeType == TreeType.Normal ? 1 : 100 - 1);
 
-                    if (treeType == TreeType.Normal) graph.AddLink(friendsList.Key, friend.Id);
-                    else graph.AddLink(friend.Id, friendsList.Key);
+                    if (treeType == TreeType.Normal) graph.AddEdge(friendsList.Key, friend.Id);
+                    else graph.AddEdge(friend.Id, friendsList.Key);
 
                     toDownloadList.Add(friend.Id);
                 }
@@ -53,7 +53,7 @@ namespace HandshakesTheory.Models
 
         private static LeveledGraph<int, VkUser> IncreaseDepthOfUsersSocialGraph(LeveledGraph<int, VkUser> graph, TreeType treeType)
         {
-            var toDownloadList = Vk.getUsersIdsOfLevel(graph, treeType == TreeType.Normal ? graph.Depth : 100 - graph.Depth);
+            var toDownloadList = Vk.GetUsersIdsOfLevel(graph, treeType == TreeType.Normal ? graph.Depth : 100 - graph.Depth);
 
             var friendsOfFriends = Vk.DownloadFriendsIds(toDownloadList);
 
@@ -64,12 +64,12 @@ namespace HandshakesTheory.Models
 
                 foreach (var friend in friendsOfFriendIds)
                 {
-                    graph.AddNode(friend.Id, friend, treeType == TreeType.Normal ? graph.Depth + 1 : 100 - graph.Depth - 1);
+                    graph.AddVertex(friend.Id, friend, treeType == TreeType.Normal ? graph.Depth + 1 : 100 - graph.Depth - 1);
 
                     if (treeType == TreeType.Normal)
-                        graph.AddLink(friendsList.Key, friend.Id);
+                        graph.AddEdge(friendsList.Key, friend.Id);
                     else
-                        graph.AddLink(friend.Id, friendsList.Key);
+                        graph.AddEdge(friend.Id, friendsList.Key);
                 }
             }
 
@@ -89,8 +89,6 @@ namespace HandshakesTheory.Models
 
             int currentDepth = 3;
 
-            
-
             while (!(allPathes = pathSearcher.SearchPathes(LeveledGraph<int, VkUser>.Merge(normalGraph, reversedGraph), firstUser.Id, secondUser.Id)).Any() && currentDepth++ < maximalDepth)
             {
                 if (normalGraph.Size < reversedGraph.Size) normalGraph = Vk.IncreaseDepthOfUsersSocialGraph(normalGraph, TreeType.Normal);
@@ -101,7 +99,7 @@ namespace HandshakesTheory.Models
         }
 
 
-        static IEnumerable<int> getUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.getNodesOfLevel(level).Select(node => node.Id);
+        static IEnumerable<int> GetUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.GetNodesOfLevel(level).Select(node => node.Id);
 
         public static async Task<string> DownloadUserInfo(int id) => await dataLoader.DownloadDataAsync(makeFriendsRequestUrl(id));
 

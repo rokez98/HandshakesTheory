@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace GraphLibrary.Models
+﻿namespace GraphLibrary.Models
 {
     public interface IGraph<TKey, TData> 
     {
         int Depth { get; set; }
         int Size { get; }
 
-        Dictionary<TKey, IVertex<TKey, TData>> Graph { get; set; }
+        IVertex<TKey, TData> this[TKey key] { get; }
 
-        void AddNode(TKey key, TData data, int depth);
-        void AddLink(TKey from, TKey to);
+        void AddVertex(TKey key, TData data, int depth);
+        void AddEdge(TKey from, TKey to);
     }
 }

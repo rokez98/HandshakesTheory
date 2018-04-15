@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GraphLibrary.Models
 {
@@ -12,7 +10,7 @@ namespace GraphLibrary.Models
 
         private void makeAnswer(IGraph<TKey, TData> Graph, int population)
         {
-            answers.Add(path.Take(population + 1).Select(id => Graph.Graph[id].Data).ToArray());
+            answers.Add(path.Take(population + 1).Select(id => Graph[id].Data).ToArray());
         }
 
         private void DFS(IGraph<TKey, TData> Graph ,TKey currentKey, TKey searchedKey, int depth)
@@ -22,8 +20,7 @@ namespace GraphLibrary.Models
 
             if (Comparer<TKey>.Equals(currentKey, searchedKey)) makeAnswer(Graph, depth);
 
-            IVertex<TKey, TData> currentVertex = Graph.Graph[currentKey];
-
+            IVertex<TKey, TData> currentVertex = Graph[currentKey];
             foreach (var childKey in currentVertex.Edges)
                 DFS(Graph, childKey, searchedKey, depth + 1);
         }
