@@ -78,15 +78,20 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        public static List<VkUser[]> SearchPathesBetweenUsers(VkUser firstUser, VkUser secondUser, int maximalDepth)
+        public static IEnumerable<VkUser[]> SearchPathesBetweenUsers(VkUser firstUser, VkUser secondUser, int maximalDepth)
         {
+            IPathSearcher<int, VkUser> pathSearcher = new DfsSearcher<int, VkUser>();
+
             var normalGraph = Vk.BuildUsersSocialGraph(firstUser, TreeType.Normal);
             var reversedGraph = Vk.BuildUsersSocialGraph(secondUser, TreeType.Reversed);
 
-            var allPathes = new List<VkUser[]>();
+            IEnumerable<VkUser[]> allPathes = new List<VkUser[]>();
 
             int currentDepth = 3;
-            while (!(allPathes = LeveledGraph<int,VkUser>.Merge(normalGraph, reversedGraph).searchAllPathes(firstUser.Id, secondUser.Id)).Any() && currentDepth++ < maximalDepth)
+
+            
+
+            while (!(allPathes = pathSearcher.SearchPathes(LeveledGraph<int, VkUser>.Merge(normalGraph, reversedGraph), firstUser.Id, secondUser.Id)).Any() && currentDepth++ < maximalDepth)
             {
                 if (normalGraph.Size < reversedGraph.Size) normalGraph = Vk.IncreaseDepthOfUsersSocialGraph(normalGraph, TreeType.Normal);
                 else reversedGraph = Vk.IncreaseDepthOfUsersSocialGraph(reversedGraph, TreeType.Reversed);
@@ -102,10 +107,8 @@ namespace HandshakesTheory.Models
 
         public static Dictionary<int, IEnumerable<VkUser>> DownloadFriendsIds(IEnumerable<int> userIds)
         {
-#if DEBUG
             Stopwatch watch = new Stopwatch();
             watch.Start();
-#endif
 
             Dictionary<int, IEnumerable<VkUser>> response = new Dictionary<int, IEnumerable<VkUser>>();
 
@@ -116,14 +119,14 @@ namespace HandshakesTheory.Models
 
             watch.Stop();
 
-#if DEBUG
+
             int numberOfRequests = userIds.Distinct().Count();
             Console.WriteLine($"Time: {(double)watch.ElapsedMilliseconds / 1000} sec;");
             Console.WriteLine($"Total requests: {numberOfRequests};");
             Console.WriteLine($"Avg request time: {(double)watch.ElapsedMilliseconds / (1000 * numberOfRequests)} sec per request;");
             Console.WriteLine($"{((float)1 / 3) / ((double)watch.ElapsedMilliseconds / (1000 * numberOfRequests)) } times faster than Vk Api requests!");
             Console.WriteLine($"-----------------------------------------------------");
-#endif
+
             return response;
         }
     }

@@ -8,7 +8,7 @@
     <center>
         <div class="result-panel" id="count">
             <div class="empty-row"></div>
-            @if (Model.Any())
+            @if (Model != null && Model.Any())
     {
         <div class="text-center notification-banner success-search" style="padding: 0px 10px;">
             <h1>Success!</h1>

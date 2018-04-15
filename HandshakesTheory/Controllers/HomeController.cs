@@ -20,7 +20,7 @@ namespace HandshakesTheory.Controllers
             try
             {
                 var pathesList = Vk.SearchPathesBetweenUsers(searchModel.FirstUser, searchModel.SecondUser, searchModel.MaxPathLength);
-                return View(pathesList.DistinctBy(list => list[1].Id));
+                return View(pathesList.OrderBy(p => p.Length).Take(50));
             }
             catch (Exception ex)
             {
