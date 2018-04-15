@@ -18,7 +18,7 @@ namespace GraphLibrary.Models
             if (path.Count <= depth) path.Add(currentKey);
             else path[depth] = currentKey;
 
-            if (Comparer<TKey>.Equals(currentKey, searchedKey)) makeAnswer(Graph, depth);
+            if (Equals(currentKey, searchedKey)) makeAnswer(Graph, depth);
 
             IVertex<TKey, TData> currentVertex = Graph[currentKey];
             foreach (var childKey in currentVertex.Edges)

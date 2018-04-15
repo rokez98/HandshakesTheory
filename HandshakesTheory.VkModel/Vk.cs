@@ -72,7 +72,6 @@ namespace HandshakesTheory.Models
                         graph.AddEdge(friend.Id, friendsList.Key);
                 }
             }
-
             graph.Depth++;
 
             return graph;
@@ -80,7 +79,7 @@ namespace HandshakesTheory.Models
 
         public static IEnumerable<VkUser[]> SearchPathesBetweenUsers(VkUser firstUser, VkUser secondUser, int maximalDepth)
         {
-            IPathSearcher<int, VkUser> pathSearcher = new DfsSearcher<int, VkUser>();
+            PathSearcherContext<int, VkUser> searchContext = new PathSearcherContext<int, VkUser>(new DfsSearcher<int, VkUser>());
 
             var normalGraph = Vk.BuildUsersSocialGraph(firstUser, TreeType.Normal);
             var reversedGraph = Vk.BuildUsersSocialGraph(secondUser, TreeType.Reversed);
@@ -89,7 +88,7 @@ namespace HandshakesTheory.Models
 
             int currentDepth = 3;
 
-            while (!(allPathes = pathSearcher.SearchPathes(LeveledGraph<int, VkUser>.Merge(normalGraph, reversedGraph), firstUser.Id, secondUser.Id)).Any() && currentDepth++ < maximalDepth)
+            while (!(allPathes = searchContext.Search(LeveledGraph<int, VkUser>.Merge(normalGraph, reversedGraph), firstUser.Id, secondUser.Id)).Any() && currentDepth++ < maximalDepth)
             {
                 if (normalGraph.Size < reversedGraph.Size) normalGraph = Vk.IncreaseDepthOfUsersSocialGraph(normalGraph, TreeType.Normal);
                 else reversedGraph = Vk.IncreaseDepthOfUsersSocialGraph(reversedGraph, TreeType.Reversed);
