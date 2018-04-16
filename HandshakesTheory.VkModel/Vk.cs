@@ -17,12 +17,7 @@ namespace HandshakesTheory.Models
 
         public static IVkDataLoader dataLoader = new VkDataLoader();
         public static IVkDataParser<VkUser> dataParser = new VkDataParser<VkUser>();
-
-        private static string MakeFriendsRequestUrl(int id)
-        {
-            var fields = string.Join(",", typeof(VkUser).GetProperties().Select(p => p.CustomAttributes.First().ConstructorArguments.First().Value));
-            return "https://api.vk.com/method/friends.get?v=5.73&fields=" + fields + "&user_id=" + id;
-        }
+        public static VkFriendsInfoRequestMaker requestMaker = new VkFriendsInfoRequestMaker();
 
         private static LeveledGraph<int, VkUser> BuildUsersSocialGraph(VkUser user, TreeType treeType)
         {
@@ -54,6 +49,8 @@ namespace HandshakesTheory.Models
 
             return graph;
         }
+
+        private static IEnumerable<int> GetUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.GetNodesOfLevel(level).Select(node => node.Id);
 
         private static LeveledGraph<int, VkUser> IncreaseDepthOfUsersSocialGraph(LeveledGraph<int, VkUser> graph, TreeType treeType)
         {
@@ -101,10 +98,7 @@ namespace HandshakesTheory.Models
             return allPathes;
         }
 
-
-        static IEnumerable<int> GetUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.GetNodesOfLevel(level).Select(node => node.Id);
-
-        public static async Task<string> DownloadUserInfo(int id) => await dataLoader.DownloadDataAsync(MakeFriendsRequestUrl(id));
+        public static async Task<string> DownloadUserInfo(int id) => await dataLoader.DownloadDataAsync(requestMaker.MakeFriendsInfoRequest(id));
 
         public static Dictionary<int, IEnumerable<VkUser>> DownloadFriendsIds(IEnumerable<int> userIds)
         {

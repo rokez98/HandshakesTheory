@@ -8,7 +8,7 @@ namespace HandshakesTheory.Models
     public class VkDataParser<T> : IVkDataParser<T> where T: new()
     {
         private JToken getResponseSection(string response) => JToken.Parse(response)["response"];
-        private static PropertyInfo[] typeProperties { get; set; } = typeof(VkUser).GetProperties();
+        private static PropertyInfo[] typeProperties { get; set; } = typeof(T).GetProperties();
 
         private T parseJsonItem(JToken userJson)
         {
@@ -16,7 +16,9 @@ namespace HandshakesTheory.Models
             foreach (var property in typeProperties)
             {
                 var parser = property.PropertyType.GetMethod("Parse", new[] { typeof(string) });
-                string fieldJson = (string)userJson[property.CustomAttributes.First().ConstructorArguments.First().Value];
+                var propertyResponseName = property.GetCustomAttribute<VkApiResponseAttribute>()?.Name ?? throw new System.Exception("VkApiResponseAttribute dosen't exist!");           
+                string fieldJson = (string)userJson[propertyResponseName];
+
                 property.SetValue(user, parser == null ? fieldJson : parser.Invoke(null, new object[] { fieldJson }));
             }
             return user;
