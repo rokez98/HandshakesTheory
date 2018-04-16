@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace HandshakesTheory.Models
 {
-    public interface IVkDataParser
+    public interface IVkDataParser<T>
     {
-        IEnumerable<VkUser> parseUsers(string response);
+        IEnumerable<T> ParseData(string response);
     }
 }

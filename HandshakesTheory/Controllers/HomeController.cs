@@ -3,7 +3,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using HandshakesTheory.Models;
 
-
 namespace HandshakesTheory.Controllers
 {
     public class HomeController : Controller

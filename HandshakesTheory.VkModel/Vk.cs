@@ -16,9 +16,13 @@ namespace HandshakesTheory.Models
         }
 
         public static IVkDataLoader dataLoader = new VkDataLoader();
-        public static IVkDataParser dataParser = new VkDataParser();
+        public static IVkDataParser<VkUser> dataParser = new VkDataParser<VkUser>();
 
-        private static string MakeFriendsRequestUrl(int id) => "https://api.vk.com/method/friends.get?v=5.73&fields=photo_100&user_id=" + id;
+        private static string MakeFriendsRequestUrl(int id)
+        {
+            var fields = string.Join(",", typeof(VkUser).GetProperties().Select(p => p.CustomAttributes.First().ConstructorArguments.First().Value));
+            return "https://api.vk.com/method/friends.get?v=5.73&fields=" + fields + "&user_id=" + id;
+        }
 
         private static LeveledGraph<int, VkUser> BuildUsersSocialGraph(VkUser user, TreeType treeType)
         {
@@ -111,7 +115,7 @@ namespace HandshakesTheory.Models
 
             List<Task> taskList = new List<Task>();
             foreach (var id in userIds)
-                taskList.Add(DownloadUserInfo(id).ContinueWith(task => response.Add(id, dataParser.parseUsers(task.Result))));
+                taskList.Add(DownloadUserInfo(id).ContinueWith(task => response.Add(id, dataParser.ParseData(task.Result))));
             Task.WaitAll(taskList.ToArray());
 
             watch.Stop();
