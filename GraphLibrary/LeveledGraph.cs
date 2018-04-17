@@ -12,13 +12,12 @@ namespace GraphLibrary.Models
         {
             if (Graph.ContainsKey(from) && Graph.ContainsKey(to) && (Graph[from] as DepthVertex<TKey, TData>).Depth < (Graph[to] as DepthVertex<TKey, TData>).Depth) Graph[from].Edges.Add(to);
         }
-
         public override void AddVertex(TKey key, TData data, int depth = 0)
         {
             if (!Graph.ContainsKey(key)) Graph.Add(key, new DepthVertex<TKey, TData>(data, depth));
         }
 
-        public IEnumerable<TData> GetNodesOfLevel(int level)
+        public IEnumerable<TData> GetVertexesOfLevel(int level)
         {
             return Graph.Where(node => (node.Value as DepthVertex<TKey, TData>).Depth == level).Select(node => node.Value.Data);
         }

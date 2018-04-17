@@ -50,7 +50,7 @@ namespace HandshakesTheory.Models
             return graph;
         }
 
-        private static IEnumerable<int> GetUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.GetNodesOfLevel(level).Select(node => node.Id);
+        private static IEnumerable<int> GetUsersIdsOfLevel(LeveledGraph<int, VkUser> graph, int level) => graph.GetVertexesOfLevel(level).Select(node => node.Id);
 
         private static LeveledGraph<int, VkUser> IncreaseDepthOfUsersSocialGraph(LeveledGraph<int, VkUser> graph, TreeType treeType)
         {
