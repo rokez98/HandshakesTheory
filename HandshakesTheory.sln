@@ -14,9 +14,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{62
 		Graphics\Site.Index.psd = Graphics\Site.Index.psd
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphLibrary", "GraphLibrary\GraphLibrary.csproj", "{0C6B673C-9056-4AA9-8E24-09413BFF3E08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphLibrary", "GraphLibrary\GraphLibrary.csproj", "{0C6B673C-9056-4AA9-8E24-09413BFF3E08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandshakesTheory.VkModel", "HandshakesTheory.VkModel\HandshakesTheory.VkModel.csproj", "{B98CF4D2-E13F-4C60-8D81-03E471ED8031}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandshakesTheory.VkModel", "HandshakesTheory.VkModel\HandshakesTheory.VkModel.csproj", "{B98CF4D2-E13F-4C60-8D81-03E471ED8031}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Info", "Info", "{9B60A832-8C66-4776-92FD-5BF32149E288}"
+	ProjectSection(SolutionItems) = preProject
+		ClassDiagram.vsdx = ClassDiagram.vsdx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
