@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\banners\ReachingHands.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HandshakesTheory.VkModel\HandshakesTheory.VkModel.csproj" />
   </ItemGroup>
 

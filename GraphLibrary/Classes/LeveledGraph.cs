@@ -17,7 +17,7 @@ namespace GraphLibrary.Models
             if (!Graph.ContainsKey(key)) Graph.Add(key, new DepthVertex<TKey, TData>(data, depth));
         }
 
-        public IEnumerable<TData> GetVertexesOfLevel(int level)
+        public IEnumerable<TData> GetVertexesOfLevel(long level)
         {
             return Graph.Where(node => (node.Value as DepthVertex<TKey, TData>).Depth == level).Select(node => node.Value.Data);
         }

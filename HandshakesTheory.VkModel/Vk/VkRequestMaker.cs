@@ -1,6 +1,6 @@
 ﻿namespace HandshakesTheory.Models
 {
-    public abstract class VkRequestMaker : IVkRequestMaker
+    public abstract class VkRequestMaker : IRequestMaker
     {
         string Site { get; } = "https://api.vk.com/method";
         protected abstract string Method { get; }
@@ -14,3 +14,4 @@
         }
     }
 }
+ 

@@ -5,13 +5,15 @@ using System.Reflection;
 
 namespace HandshakesTheory.Models
 {
-    public class VkDataParser<T> : IVkDataParser<T> where T: new()
+    public class VkDataParser : IDataParser
     {
         private JToken getResponseSection(string response) => JToken.Parse(response)["response"];
-        private static PropertyInfo[] typeProperties { get; set; } = typeof(T).GetProperties();
+        private static PropertyInfo[] typeProperties { get; set; } 
 
-        private T parseJsonItem(JToken userJson)
+        private T parseJsonItem<T>(JToken userJson) where T : new()
         {
+            PropertyInfo[] typeProperties = typeof(T).GetProperties(); 
+
             T user = new T();
             foreach (var property in typeProperties)
             {
@@ -24,10 +26,10 @@ namespace HandshakesTheory.Models
             return user;
         }
 
-        public IEnumerable<T> ParseData(string response)
+        public IEnumerable<T> ParseData<T>(string response) where T : new()
         {
             JToken parsedResponse = getResponseSection(response);
-            return parsedResponse == null ? Enumerable.Empty<T>() : parsedResponse["items"].Select(userInfo => parseJsonItem(userInfo)).ToList();
+            return parsedResponse == null ? Enumerable.Empty<T>() : parsedResponse["items"].Select(userInfo => parseJsonItem<T>(userInfo)).ToList();
         }
     }
 }

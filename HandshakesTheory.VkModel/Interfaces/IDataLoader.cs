@@ -2,7 +2,7 @@
 
 namespace HandshakesTheory.Models
 {
-    public interface IVkDataLoader
+    public interface IDataLoader
     {
         Task<string> DownloadDataAsync(string requestString);
         string DownloadData(string requestString);

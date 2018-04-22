@@ -5,15 +5,6 @@ VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandshakesTheory", "HandshakesTheory\HandshakesTheory.csproj", "{44249403-C8C0-40E4-95AE-AB0EB3DDD6CB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Graphics", "Graphics", "{62698438-9D6E-414F-A3B5-246AB61F73E0}"
-	ProjectSection(SolutionItems) = preProject
-		C:\Users\Vadim\Pictures\CantChoose.png = C:\Users\Vadim\Pictures\CantChoose.png
-		C:\Users\Vadim\Pictures\NoLinks.png = C:\Users\Vadim\Pictures\NoLinks.png
-		C:\Users\Vadim\Pictures\RequestForm.png = C:\Users\Vadim\Pictures\RequestForm.png
-		Graphics\Site.Index.png = Graphics\Site.Index.png
-		Graphics\Site.Index.psd = Graphics\Site.Index.psd
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphLibrary", "GraphLibrary\GraphLibrary.csproj", "{0C6B673C-9056-4AA9-8E24-09413BFF3E08}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandshakesTheory.VkModel", "HandshakesTheory.VkModel\HandshakesTheory.VkModel.csproj", "{B98CF4D2-E13F-4C60-8D81-03E471ED8031}"

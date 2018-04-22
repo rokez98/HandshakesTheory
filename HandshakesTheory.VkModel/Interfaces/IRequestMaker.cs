@@ -1,6 +1,6 @@
 ﻿namespace HandshakesTheory.Models
 {
-    public interface IVkRequestMaker
+    public interface IRequestMaker
     {
         string MakeRequestUrl();
     }

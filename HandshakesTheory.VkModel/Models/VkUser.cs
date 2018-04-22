@@ -2,10 +2,10 @@
 
 namespace HandshakesTheory.Models
 {
-    public class VkUser
+    public class VkUser : IUser
     {
         [VkApiResponse("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [VkApiResponse("first_name")]
         public string FirstName { get; set; }
@@ -16,7 +16,7 @@ namespace HandshakesTheory.Models
         [VkApiResponse("photo_100")]
         public string PhotoUrl { get; set; }
 
-        public VkUser(int id = 0, string firstName = null, string lastName = null, string photoUrl = null, SortedSet<int> friends = null)
+        public VkUser(long id = 0, string firstName = null, string lastName = null, string photoUrl = null)
         {
             this.Id = id;
             this.FirstName = firstName;

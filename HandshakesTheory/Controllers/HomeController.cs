@@ -15,7 +15,9 @@ namespace HandshakesTheory.Controllers
         {
             try
             {
-                var pathesList = Vk.SearchPathesBetweenUsers(searchModel.FirstUser, searchModel.SecondUser, searchModel.MaxPathLength);
+                ISocialNetwork socialNetwork = new SocialNetworkFactory().CreateSocialNetwork(SocialNetworkFactory.SocialNetworks.Vk);
+
+                var pathesList = socialNetwork.SearchPathesBetweenUsers(searchModel.FirstUser, searchModel.SecondUser, searchModel.MaxPathLength);
                 return View("Search", pathesList.OrderBy(p => p.Length).Take(50));
             }
             catch (Exception ex)

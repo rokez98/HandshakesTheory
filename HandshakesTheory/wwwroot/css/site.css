@@ -305,7 +305,7 @@ li .arrow {
 }
 
     .too-short-chain:before {
-        background: url("../images/ReachingHands.png") no-repeat;
+        background: url("../images/banners/ReachingHands.png") no-repeat;
         background-position: center;
         background-size: 100%;
         width: 100%;
@@ -317,7 +317,7 @@ li .arrow {
 }
 
     .exception:before {
-        background: url("../images/Error.png") no-repeat;
+        background: url("../images/banners/Error.png") no-repeat;
         background-position: center;
         background-size: 30%;
         width: 100%;
@@ -351,7 +351,7 @@ li .arrow {
 }
 
     .success-search:before {
-        background: url("../images/PeopleChain.png") no-repeat;
+        background: url("../images/banners/PeopleChain.png") no-repeat;
         background-position: center;
         background-size: 100%;
         width: 100%;

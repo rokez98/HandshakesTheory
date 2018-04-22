@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace HandshakesTheory.Models
 {
-    public class VkDataLoader : IVkDataLoader
+    public class OkDataLoader : IDataLoader
     {
         public async Task<string> DownloadDataAsync(string requestString)
         {
