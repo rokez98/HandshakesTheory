@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace HandshakesTheory.Models
+namespace HandshakesTheory.Vk.Interfaces
 {
     public interface IDataLoader
     {

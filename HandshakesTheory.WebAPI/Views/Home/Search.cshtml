@@ -1,0 +1,86 @@
+﻿@model IEnumerable<User[]>
+
+@{
+    ViewData["Title"] = "Search result";
+}
+
+<div class="result-panels">
+    <center>
+        <div class="result-panel" id="count">
+            <div class="empty-row"></div>
+            @if (Model != null && Model.Any())
+    {
+        <div class="text-center notification-banner success-search" style="padding: 0px 10px;">
+            <h1>Success!</h1>
+            <div class="text-info about-information" style="font-size: 14px;">
+                <p>
+                    You are linked by @Math.Abs(Model.First().Length - 1) handshakes
+                </p>
+            </div>
+        </div>
+}
+else
+{
+        <div class="text-center notification-banner too-short-chain" style="padding: 0px 10px;">
+            <h1>No links</h1>
+            <div class="text-info about-information" style="font-size: 14px;">
+                <p>
+                    No links found. Try increasing the maximal path length.
+                </p>
+            </div>
+        </div>
+}
+        </div>
+            <div class="result-panel active" id="write">
+                <ul class="list-group">
+                    @foreach (var answer in Model)
+                    {
+                    <li class="list-group-item shortlist">
+                        <div class="item-row">
+                            @foreach (var user in answer)
+                            {
+                            <div class="item-cell">
+                                <a href="@string.Format("https://vk.com/id{0}", user.Id)" target="_blank" title="">
+                                <p>@user.FirstName</p><p>@user.LastName </p>
+                                <div>
+                                    <img class="user-photo round" src="@string.Format("{0}", user.PhotoUrl)" />
+                                </div>
+                                </a>
+                            </div>
+                            }
+                        </div>
+                        <div class="arrow arrow-expand" >
+                            Expand
+                            <img src="~/images/ExpandArrow.png" height="10" />
+                        </div>
+                        <div class="arrow arrow-hide">
+                            Hide
+                            <img src="~/images/HideArrow.png" height="10" />
+                        </div>
+                    </li>
+                    }
+                </ul>
+            </div>
+</center>
+</div>
+
+<script>
+    var listItems = document.getElementsByClassName('arrow-expand');
+    for (var i = 0; i < listItems.length; i++) {
+        listItems[i].addEventListener('click', function () {
+            var parent = this.parentElement;
+            parent.classList.remove("shortlist");
+            parent.classList.add("expanded");
+        });
+    }
+
+    var listItems = document.getElementsByClassName('arrow-hide');
+    for (var i = 0; i < listItems.length; i++) {
+        listItems[i].addEventListener('click', function () {
+            var parent = this.parentElement;
+            parent.classList.add("shortlist");
+            parent.classList.remove("expanded");
+        });
+    }
+</script>
+

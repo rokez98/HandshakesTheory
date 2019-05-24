@@ -1,25 +1,17 @@
-﻿using System;
+﻿using HandshakesTheory.GraphLibrary.Core;
+using HandshakesTheory.Vk.Enums;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using GraphLibrary.Models;
 
-namespace HandshakesTheory.Models
+namespace HandshakesTheory.Vk.Interfaces
 {
-
-    public enum TreeType
-    {
-        Normal,
-        Reversed
-    }
 
     public interface ISocialNetwork
     {
-        LeveledGraph<long, IUser> BuildUsersSocialGraph(IUser user, TreeType treeType);
+        LeveledGraph<long, long> BuildUsersSocialGraph(IUser user, TreeType treeType);
         IEnumerable<long> GetUsersIdsOfLevel(LeveledGraph<long, IUser> graph, long level);
-        LeveledGraph<long, IUser> IncreaseDepthOfUsersSocialGraph(LeveledGraph<long, IUser> graph, TreeType treeType);
-        IEnumerable<IUser[]> SearchPathesBetweenUsers(IUser firstUser, IUser secondUser, long maximalDepth);
+        LeveledGraph<long, long> IncreaseDepthOfUsersSocialGraph(LeveledGraph<long, IUser> graph, TreeType treeType);
+        IEnumerable<long[]> SearchPathesBetweenUsers(IUser firstUser, IUser secondUser, long maximalDepth);
         Task<string> DownloadUserInfo(long id);
         Dictionary<long, IEnumerable<IUser>> DownloadFriendsIds(IEnumerable<long> userIds);
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HandshakesTheory.Models
+namespace HandshakesTheory.Vk.Infrastructure
 {
     public class VkApiResponseAttribute : Attribute
     {
