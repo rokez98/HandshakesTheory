@@ -16,7 +16,7 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         APP_NAME: ${{ 'handshakestheory' }}
       run: |
-        cd ./HandshakesTheory.WebAPI
+        cd ./
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
         heroku container:push web -a handshakestheory
         heroku container:release web -a handshakestheory
