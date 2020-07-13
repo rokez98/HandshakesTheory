@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  handshakestheory.webapi:
+    image: ${DOCKER_REGISTRY-}handshakestheorywebapi
+    build:
+      context: .
+      dockerfile: HandshakesTheory.WebAPI/Dockerfile
