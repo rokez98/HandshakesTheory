@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build_api:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
