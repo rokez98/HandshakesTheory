@@ -44,15 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="client\dist\app\app.bundle.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="client\dist\app\app.bundle.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="client\dist\vendor.bundle.js">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="client\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
