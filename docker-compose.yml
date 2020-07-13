@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: HandshakesTheory.WebAPI/Dockerfile
+
+  handshakestheory.site:
+    image: ${DOCKER_REGISTRY-}handshakestheorysite
+    build:
+      context: .
+      dockerfile: HandshakesTheory.Site/Dockerfile
+
