@@ -45,6 +45,17 @@ namespace HandshakesTheory
             services.AddScoped<VkNetwork>();
 
             services.AddAutoMapper();
+
+            services.AddCors(builder =>
+            {
+                builder.AddPolicy("CorsPolicy", options =>
+                {
+                    options.SetIsOriginAllowed(origin => true);
+                    options.AllowAnyMethod();
+                    options.AllowAnyHeader();
+                    options.AllowCredentials();
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,6 +68,8 @@ namespace HandshakesTheory
             }
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 

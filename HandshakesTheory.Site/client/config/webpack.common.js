@@ -6,17 +6,14 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 module.exports = env => ({
   entry: {
     app: [
-      './src/app/collaborate.js',
-      './src/app/collaborate.less'
+      './src/app/index.js',
+      './src/app/app.less'
     ]
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: function (chunk) {
-            return chunk.name !== 'pdfjsWorker'
-          },
           test: path.resolve(__dirname, '../node_modules'),
           enforce: true,
           filename: 'vendor.bundle.js'
