@@ -21,7 +21,7 @@ module.exports = env => merge(common(env), {
       ],
       onEnd: [
         {
-          delete: [path.resolve(__dirname, '../build/vendor~app'), path.resolve(__dirname, '../build/vendors~pdfjsWorker')],
+          delete: [path.resolve(__dirname, '../build/vendor~app')],
         }
       ]
     }),

@@ -66,6 +66,7 @@
     "connected-react-router": "^6.8.0",
     "core-js": "^3.6.5",
     "filemanager-webpack-plugin": "^2.0.5",
+    "jquery": "^3.5.1",
     "lodash-webpack-plugin": "^0.11.5",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
