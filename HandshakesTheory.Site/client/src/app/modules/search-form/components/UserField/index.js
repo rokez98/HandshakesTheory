@@ -4,11 +4,11 @@ import { TextField, Typography, Box, InputAdornment } from '@material-ui/core'
 import Close from '@material-ui/icons/Close'
 import Check from '@material-ui/icons/Check'
 
-import { searchFormService } from '../..'
+import { getUser } from '../../../shared/services'
 
-const UserField = ({ label, user, onChange }) => {
+const UserField = ({ inputRef, label, user, onChange }) => {
   const handleChange = async e => {
-    const result = await searchFormService.getUser(e.target.value)
+    const result = await getUser(e.target.value)
 
     onChange(result)
   }
@@ -22,6 +22,7 @@ const UserField = ({ label, user, onChange }) => {
         label={label}
         onChange={handleChange}
         InputProps={{
+          inputRef: inputRef,
           startAdornment: (
             <Typography>vk.com/</Typography>
           ),

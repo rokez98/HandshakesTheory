@@ -2,7 +2,8 @@ import React from 'react'
 import { Box, Typography } from '@material-ui/core'
 
 import { suggestions } from '../../constants'
-import Suggestion from '../Suggestion'
+
+import VkUser from '../../../shared/components/VkUser'
 
 const Suggestions = ({ onSelect }) => {
   return (
@@ -11,7 +12,9 @@ const Suggestions = ({ onSelect }) => {
         Can't choose? Let us help you
       </Typography>
       <Box display='flex' alignItems='center' justifyContent='center' flexWrap='wrap'>
-        {suggestions.map(item => <Suggestion key={item.Id} {...item} onSelect={() => onSelect(item)} />)}
+        {suggestions.map((item, index) =>
+          <VkUser key={item.Id} index={index} {...item} onSelect={() => onSelect(item)} />
+        )}
       </Box>
     </Box>
   )
