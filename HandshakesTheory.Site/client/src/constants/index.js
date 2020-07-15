@@ -1,1 +1,1 @@
-export const apiRootUrl = 'http://localhost:32768/' // 'https://handshakesapi.herokuapp.com/'
+export const apiRootUrl = 'https://handshakesapi.herokuapp.com/'
