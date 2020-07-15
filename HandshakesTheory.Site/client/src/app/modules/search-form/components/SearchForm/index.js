@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -15,6 +15,13 @@ const SearchForm = ({ searchFormActions: { sendSearchRequest } }) => {
   const [secondUser, setSecondUser] = useState(null)
   const [maxPathLength, setMaxPathLength] = useState(7)
 
+  const targetUserRef = useRef()
+
+  const onSelectSuggestion = (user) => {
+    targetUserRef.current.value = user.Id
+    setSecondUser(user)
+  }
+
   const onSubmit = () => {
     sendSearchRequest({
       FirstUser: firstUser,
@@ -25,35 +32,33 @@ const SearchForm = ({ searchFormActions: { sendSearchRequest } }) => {
 
   return (
     <Box mt={1} mb={1}>
-      <form>
-        <Paper>
-          <Box p={2}>
-            <Typography variant='h5' align='center'>
-              Try it yourself
+      <Paper>
+        <Box p={2}>
+          <Typography variant='h5' align='center'>
+            Try it yourself
           </Typography>
-            <Typography variant='body1'>
-              Enter vk IDs, between which you are looking for link
+          <Typography variant='body1'>
+            Enter vk IDs, between which you are looking for link
           </Typography>
-            <UserField label='Start user url' user={firstUser} onChange={setFirstUser} />
-            <UserField label='End user url' user={secondUser} onChange={setSecondUser} />
-            <Typography>
-              Set maximal path length (affects work speed)
+          <UserField label='Start user url' user={firstUser} onChange={setFirstUser} />
+          <UserField label='End user url' user={secondUser} onChange={setSecondUser} inputRef={targetUserRef} />
+          <Typography>
+            Set maximal path length (affects work speed)
             </Typography>
-            <Slider
-              defaultValue={maxPathLength}
-              valueLabelDisplay='auto'
-              step={1}
-              marks
-              min={3}
-              max={7}
-            />
-            <Button color='primary' variant='contained' onClick={onSubmit}>
-              submit
-          </Button>
-          </Box>
-        </Paper>
-      </form>
-      <Suggestions onSelect={setSecondUser} />
+          <Slider
+            defaultValue={maxPathLength}
+            valueLabelDisplay='auto'
+            step={1}
+            marks
+            min={3}
+            max={7}
+          />
+          <Button disabled={!Boolean(firstUser && secondUser)} color='primary' variant='contained' type='submit' onClick={onSubmit}>
+            submit
+            </Button>
+        </Box>
+      </Paper>
+      <Suggestions onSelect={onSelectSuggestion} />
     </Box>
   )
 }

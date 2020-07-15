@@ -14,7 +14,7 @@ const SearchResults = ({ isError, isSuccess, results }) => {
   return (
     <Box display='flex' flexDirection='column' alignItems='stretch'>
       {isError && <Error />}
-      {isSuccess && results.length && <Success />}
+      {isSuccess && Boolean(results.length) && <Success />}
       {isSuccess && !results.length && <NoLinks />}
       <Box display='flex' flexDirection='column' alignItems='stretch'>
         {results.map((result, index) => <Result key={index} result={result} />)}

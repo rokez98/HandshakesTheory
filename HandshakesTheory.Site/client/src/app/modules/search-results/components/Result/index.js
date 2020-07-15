@@ -6,21 +6,22 @@ import AccordionSummary from '@material-ui/core/AccordionSummary'
 import AccordionDetails from '@material-ui/core/AccordionDetails'
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import VkUser from '../../../shared/components/VkUser'
 
 const Result = ({ result }) => {
   return (
     <Accordion>
       <AccordionSummary title='Expand results' expandIcon={<ExpandMoreIcon />}>
-        <Box display='flex' alignItems='center' justifyContent='center'>
-          {result.map(item => (
-            <Avatar style={{ width: 75, height: 75 }} src={item.PhotoUrl} />
+        <Box display='flex' alignItems='center' justifyContent='space-between' flexGrow={1}>
+          {result.map((item, index) => (
+            <VkUser key={item.Id} index={index} {...item} />
           ))}
         </Box>
       </AccordionSummary>
       <AccordionDetails>
-        <Box display='flex' flexDirection='column' alignItems='center'>
+        <Box display='flex' justifyContent='space-between' alignItems='center' flexGrow={1}>
           {result.map(item => (
-            <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
+            <Box display='flex' flexDirection='column' alignItems='center' justifyContent='space-between'>
               <Avatar style={{ width: 50, height: 50 }} src={item.PhotoUrl} />
               <Typography
                 component='a'
