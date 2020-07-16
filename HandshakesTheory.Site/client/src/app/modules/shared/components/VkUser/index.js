@@ -1,10 +1,33 @@
 import React, { useState, useRef } from 'react'
-import { Box, Typography, Avatar, Fade } from '@material-ui/core'
+import { Box, Typography, Avatar, Fade, Popper } from '@material-ui/core'
 import VkUserDetails from '../VkUserDetails'
 
 let timeoutId
 
-const VkUser = ({ index, Id, FirstName, LastName, PhotoUrl, Role, onSelect }) => {
+const UserPopper = ({ anchorEl, children }) => {
+  return (
+    <Popper open={true} anchorEl={anchorEl} placement='top-start' transition>
+      {({ TransitionProps }) => (
+        <Fade {...TransitionProps} timeout={500}>
+          <div>
+            {children}
+          </div>
+        </Fade>
+      )}
+    </Popper>
+  )
+}
+
+const VkUser = ({
+  index,
+  Id,
+  FirstName,
+  LastName,
+  PhotoUrl,
+  Role,
+  onSelect,
+  showName = true
+}) => {
   const elementRef = useRef()
 
   const [showDetails, setShowDetails] = useState(false)
@@ -22,25 +45,31 @@ const VkUser = ({ index, Id, FirstName, LastName, PhotoUrl, Role, onSelect }) =>
   }
 
   return (
-    <Fade in={true} timeout={(index + 1) * 250}>
-      <Box
-        ref={elementRef}
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        maxWidth={150}
-        m={2}
-        onClick={onSelect}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-      >
-        <Avatar style={{ width: 100, height: 100 }} src={PhotoUrl} alt={`${FirstName} ${LastName}`} />
-        <Typography variant='body1'>{`${FirstName} ${LastName}`}</Typography>
-        <Typography variant='body2'>{Role}</Typography>
+    <Box
+      ref={elementRef}
+      display='flex'
+      flexDirection='column'
+      alignItems='center'
+      maxWidth={150}
+      m={0.5}
+      onClick={onSelect}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      <Avatar style={{ width: 32, height: 32 }} src={PhotoUrl} alt={`${FirstName} ${LastName}`} />
+      {showName &&
+        <>
+          <Typography variant='body1'>{`${FirstName} ${LastName}`}</Typography>
+          <Typography variant='body2'>{Role}</Typography>
+        </>
+      }
 
-        {showDetails && <VkUserDetails anchorEl={elementRef.current} Id={Id} />}
-      </Box>
-    </Fade>
+      {showDetails &&
+        <UserPopper anchorEl={elementRef.current}>
+          <VkUserDetails Id={Id} />
+        </UserPopper>
+      }
+    </Box>
   )
 }
 
