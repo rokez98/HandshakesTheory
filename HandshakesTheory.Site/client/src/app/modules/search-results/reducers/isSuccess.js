@@ -2,7 +2,7 @@ import { handleActions, combineActions } from 'redux-actions'
 import { searchResultsActions } from '..'
 import { searchFormActions } from '../../search-form'
 
-const defaultState = true
+const defaultState = false
 
 export default handleActions(
   {
