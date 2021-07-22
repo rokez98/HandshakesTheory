@@ -58,7 +58,7 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.6",
     "webpack-merge": "^4.2.1",
-    "xlsx": "^0.12.11"
+    "xlsx": "^0.17.0"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.12",
