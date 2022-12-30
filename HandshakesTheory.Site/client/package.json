@@ -40,7 +40,7 @@
     "less-loader": "^5.0.0",
     "lodash": "^4.17.19",
     "mini-css-extract-plugin": "^0.8.0",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "nedb": "^1.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "prop-types": "^15.5.10",
